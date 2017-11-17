@@ -1,6 +1,8 @@
 ﻿
+using myControl;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -8,6 +10,14 @@ namespace WindowsFormsApplication2
 {
     partial class Form1
     {
+        private List<myControl.UserControl1> cubeList;
+        private int move = XYLinesFactory.getMove();
+        private int cubeNum = 3;
+     //   private Panel DrawPan = new Panel();
+
+
+
+
         /// <summary>
         /// 必需的设计器变量。
         /// //创建刷新县线程
@@ -42,7 +52,7 @@ namespace WindowsFormsApplication2
 
         Button saveButton;
         //绘画panel
-        DrawPanel runMachPanel,ovalMachPanel,lieBycPanel,stBycPanel;
+        DrawPanel runMachPanel, ovalMachPanel, lieBycPanel, stBycPanel;
         //4个Image
         System.Drawing.Image runningMach_Image = System.Drawing.Image.FromFile("runningMach.png");
         System.Drawing.Image ovalMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
@@ -424,19 +434,40 @@ namespace WindowsFormsApplication2
             labelPanel.Controls.Add(label_lieByc);
 
 
+            runMachPanel = new DrawPanel();
+            runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
+            runMachPanel.Size = new Size(width,height-labelPanel.Location.Y-labelPanel.Height-20);
+            runMachPanel.BackColor = Color.White;
+           // runMachPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPan_Paint);
+                        
+         //   runMachPanel.SuspendLayout();
 
             //绘画panel
             /*
+             *
              * 
              * 绘画
              * 
              **/
-            runMachPanel = new DrawPanel();
-            runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
-            runMachPanel.Size = new Size(width,height-labelPanel.Location.Y-labelPanel.Height-1);
-            runMachPanel.BackColor = Color.Gray;
+            cubeList = new List<myControl.UserControl1>();
+            CubeHelper cubeHelper = new CubeHelper(cubeNum);
+      
+            cubeList = cubeHelper.getList();
+            for (int i = cubeNum - 1; i >= 0; i--)
+            {
+                runMachPanel.Controls.Add(cubeList[i]);
+                cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+            }
+        //    this.runMachPanel.Location = new System.Drawing.Point(1, 1);
+            this.runMachPanel.Name = "runMachPanel";
+      //      this.runMachPanel.Size = new System.Drawing.Size(971, 481);
+            this.runMachPanel.TabIndex = 0;
+           // this.runMachPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPan_Paint);
+           // XYLinesFactory.DrawXY(runMachPanel);
+           // XYLinesFactory.DrawYLine(runMachPanel, 10, 5);
 
-            this.Controls.Add(runMachPanel);
+            this.Controls.Add(this.runMachPanel);
 
             //设置监听
             label_runMach.MouseHover += new System.EventHandler(label_runMach_MouseHover);
@@ -454,7 +485,7 @@ namespace WindowsFormsApplication2
 
 
 
-            runMachPanel.Controls.Add(testLabel);
+            //runMachPanel.Controls.Add(testLabel);
 
 
             
@@ -711,9 +742,11 @@ namespace WindowsFormsApplication2
         {
             Pen panelPen = new Pen(Color.Red,2);
             Graphics g = this.CreateGraphics();
-            g.DrawLine(panelPen,0,0,10,10);
+            XYLinesFactory.DrawXY(this);
+            XYLinesFactory.DrawYLine(this, 10, 5);
         }
     }
+    
     class UserPanel :Panel
     {
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
@@ -724,6 +757,7 @@ namespace WindowsFormsApplication2
             g.DrawRectangle(panelPen, 0, 0, this.Width, this.Height);
         }
     }
+    
     //椭圆机
     class OvalMach
     {

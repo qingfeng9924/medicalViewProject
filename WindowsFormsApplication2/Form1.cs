@@ -1,4 +1,5 @@
-﻿using System;
+﻿using myControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,9 @@ namespace WindowsFormsApplication2
 {
     public partial class Form1 : Form
     {
+        private UserControl1 cube;
+        private Point p;
+
         public Form1()
         {
             InitializeComponent();
@@ -76,6 +80,41 @@ namespace WindowsFormsApplication2
             this.Cursor = Cursors.Default;
             label_lieByc.Location = new System.Drawing.Point(label_stByc.Location.X + label_stByc.Width+40, label_stByc.Location.Y);
             label_lieByc.Size = new System.Drawing.Size(lpWidth, lpHeight);
+        }
+
+        /***************************************************************************/
+
+        /*
+        private void DrawPan_Paint(object sender, PaintEventArgs e)
+        {
+            Console.WriteLine("fdsafdsa");
+            XYLinesFactory.DrawXY(runMachPanel);
+            XYLinesFactory.DrawYLine(runMachPanel, 10, 5);
+
+        }
+        */
+
+        private void cubeMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            p.X = e.X;
+            p.Y = e.Y;
+        }
+
+        private void cubeMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            cube = (sender as UserControl1);
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (cube.isMove == true)
+                {
+                    int position = cubeList.IndexOf(cube);
+                    for (int i = position + 1; i < cubeList.Count(); i++)
+                    {
+                        cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
+                    }
+                }
+            }
         }
 
     }
