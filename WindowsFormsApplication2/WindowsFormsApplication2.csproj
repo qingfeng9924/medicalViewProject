@@ -65,6 +65,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SQLHelper.cs" />
+    <Compile Include="Treadmill.cs" />
     <Compile Include="XYLinesFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

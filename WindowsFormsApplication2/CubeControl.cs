@@ -303,4 +303,8 @@ public class CubeConrol : UserControl
     {
         return this.Base;
     }
+
+
+
+   // public void getWidth(int)
 }
