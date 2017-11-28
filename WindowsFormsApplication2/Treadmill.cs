@@ -12,6 +12,7 @@ namespace WindowsFormsApplication2
         private float upperSpeed;
         private float lowerSpeed;
         private float distance;
+        private float Slope;
 
         public void setCurSpeed(float speed)
         {
@@ -51,6 +52,16 @@ namespace WindowsFormsApplication2
         public float getDistance()
         {
             return distance;
+        }
+
+        public void setSlope(float slope)
+        {
+            Slope = slope;
+        }
+
+        public float getSlope()
+        {
+            return Slope;
         }
     }
 }
