@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,14 @@ namespace WindowsFormsApplication2
 
     class CubeHelper
     {
-        private List<myControl.UserControl1> cubeList;
+        private List<CubeConrol> cubeList;
         private int cubeNum;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
         //        Form1 form = new Form1();
 
         public CubeHelper(int num)
         {
-            cubeList = new List<myControl.UserControl1>();
+            cubeList = new List<CubeConrol>();
             cubeNum = num;
             initList();
         }
@@ -25,9 +26,8 @@ namespace WindowsFormsApplication2
         {
             for (int i = 0; i < cubeNum; i++)
             {
-                cubeList.Add(new myControl.UserControl1());
-                cubeList[i].BackColor = System.Drawing.Color.Transparent;
-                cubeList[i].BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+                cubeList.Add(new CubeConrol(100,200));
+                cubeList[i].Image = Image.FromFile("1.png");
                 if (i == 0)
                 {
                     cubeList[i].Location = new System.Drawing.Point(XYLinesFactory.getMove() + 1, 398 - XYLinesFactory.getMove() - cubeList[i].Height - 1);
@@ -39,7 +39,6 @@ namespace WindowsFormsApplication2
                     //cubeList[i].Location = new System.Drawing.Point((cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width)), XYLinesFactory.getYbase() - cubeList[i].Height - 1);
                 }
                 cubeList[i].Name = "cube" + i;
-                cubeList[i].Size = new System.Drawing.Size(150, 150);
                 cubeList[i].TabIndex = i;
                 //cubeList[i].Base = form.getPanel().Height - XYLinesFactory.getMove() - 1;
                 cubeList[i].Base = 398 - XYLinesFactory.getMove() - 1;
@@ -52,7 +51,7 @@ namespace WindowsFormsApplication2
             }
         }
 
-        public List<myControl.UserControl1> getList()
+        public List<CubeConrol> getList()
         {
             return cubeList;
         }

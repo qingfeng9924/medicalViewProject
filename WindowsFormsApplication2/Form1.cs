@@ -1,5 +1,4 @@
-﻿using myControl;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +12,7 @@ namespace WindowsFormsApplication2
 {
     public partial class Form1 : Form
     {
-        private UserControl1 cube;
+        private CubeConrol cube;
         private Point p;
 
         public Form1()
@@ -102,7 +101,7 @@ namespace WindowsFormsApplication2
 
         private void cubeMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            cube = (sender as UserControl1);
+            cube = (sender as CubeConrol);
 
             if (e.Button == MouseButtons.Left)
             {

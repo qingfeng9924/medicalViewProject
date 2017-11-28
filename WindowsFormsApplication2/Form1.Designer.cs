@@ -1,6 +1,4 @@
-﻿
-using myControl;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,7 +8,7 @@ namespace WindowsFormsApplication2
 {
     partial class Form1
     {
-        private List<myControl.UserControl1> cubeList;
+        private List<CubeConrol> cubeList;
         private int move = XYLinesFactory.getMove();
         private int cubeNum = 3;
      //   private Panel DrawPan = new Panel();
@@ -449,7 +447,7 @@ namespace WindowsFormsApplication2
              * 绘画
              * 
              **/
-            cubeList = new List<myControl.UserControl1>();
+            cubeList = new List<CubeConrol>();
             CubeHelper cubeHelper = new CubeHelper(cubeNum);
       
             cubeList = cubeHelper.getList();
