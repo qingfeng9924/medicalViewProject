@@ -10,7 +10,7 @@ namespace WindowsFormsApplication2
     {
         private List<CubeConrol> cubeList;
         private int move = XYLinesFactory.getMove();
-        private int cubeNum = 3;
+        private int cubeNum = 4;
      //   private Panel DrawPan = new Panel();
 
 

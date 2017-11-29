@@ -11,7 +11,7 @@ public class CubeConrol : UserControl
     private System.Windows.Forms.Label label1;
     public int Base = 100;
     public bool isMove = false;
-    const int Band = 5;
+    const int Band = 10;
     const int MinWidth = 100;
     const int MinHeight = 100;
     private EnumMousePointPosition m_MousePointPosition;

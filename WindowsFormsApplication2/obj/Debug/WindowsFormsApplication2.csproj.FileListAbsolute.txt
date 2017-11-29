@@ -13,7 +13,6 @@ D:\github_project\medicalViewProject\WindowsFormsApplication2\bin\Debug\WindowsF
 D:\github_project\medicalViewProject\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
 D:\github_project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 D:\github_project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
-D:\github_project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
 C:\Users\yuan\Desktop\medicalViewProject\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
 C:\Users\yuan\Desktop\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\yuan\Desktop\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
