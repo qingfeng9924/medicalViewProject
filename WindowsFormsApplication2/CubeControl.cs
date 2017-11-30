@@ -4,21 +4,27 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 public class CubeConrol : UserControl
 {
+
+
     private Image image;
     private Graphics graphics;
 
     //
     private System.Windows.Forms.Label label1;
-    public int Base = 100;
+    public int Base = 0;
     public bool isMove = false;
     const int Band = 10;
-    const int MinWidth = 100;
-    const int MinHeight = 100;
+    public int MinWidth = 50;
+    public int MinHeight = 50;
+    public int MaxWidth = 300;
+    public int MaxHeight = 300;
     private EnumMousePointPosition m_MousePointPosition;
     private Point p, p1;
+
     public CubeConrol(int width, int height)
     {
-        this.MinimumSize = new System.Drawing.Size(99, 99);
+        this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
+        this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
         this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myMouseDown);
         this.MouseLeave += new System.EventHandler(this.myMouseLeave);
         this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MyMouseMove);
@@ -28,6 +34,11 @@ public class CubeConrol : UserControl
         image = new Bitmap(width, height);
         graphics = Graphics.FromImage(image);
         SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+    }
+
+    public void setWidth(int width, int height)
+    {
+
     }
     protected override void OnPaint(PaintEventArgs e)
     {
@@ -256,7 +267,7 @@ public class CubeConrol : UserControl
                     break;
                 case EnumMousePointPosition.MouseSizeTop:
 
-                    if (e.Y >= p.Y && lCtrl.Height <= MinHeight)
+                    if ((e.Y >= p.Y && lCtrl.Height <= MinHeight) || (e.Y <= p.Y && lCtrl.Height >= MaxHeight))
                         break;
                     else
                     {
@@ -270,9 +281,14 @@ public class CubeConrol : UserControl
             }
             this.Refresh();
             if (lCtrl.Width < MinWidth) lCtrl.Width = MinWidth;
-            if (lCtrl.Height < MinHeight)
+            if (lCtrl.Height <= MinHeight)
             {
                 lCtrl.Height = MinHeight;
+                lCtrl.Top = this.getBase() - lCtrl.Height;
+            }
+            else if(lCtrl.Height>=MaxHeight)
+            {
+                lCtrl.Height = MaxHeight;
                 lCtrl.Top = this.getBase() - lCtrl.Height;
             }
         }

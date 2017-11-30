@@ -29,3 +29,4 @@ C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\bin\De
 C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
 C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
+D:\github_project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache

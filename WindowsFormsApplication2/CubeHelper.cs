@@ -41,7 +41,7 @@ namespace WindowsFormsApplication2
                 cubeList[i].Name = "cube" + i;
                 cubeList[i].TabIndex = i;
                 //cubeList[i].Base = form.getPanel().Height - XYLinesFactory.getMove() - 1;
-                cubeList[i].Base = 398 - XYLinesFactory.getMove() - 1;
+                cubeList[i].Base = 398 - XYLinesFactory.getMove() - 1;     
                 /*
                 if (i != 0) 
                 {
