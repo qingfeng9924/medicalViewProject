@@ -447,6 +447,29 @@ namespace WindowsFormsApplication2
              * 绘画
              * 
              **/
+            SQLHelper sqlHelper = new SQLHelper(303);
+            List<monitorInfo> monitorList = sqlHelper.sqlReadMonitor();
+            
+            for (int i = 0; i < monitorList.Count;i++)
+            {
+                System.Console.Write(monitorList[i].DOCTOR_ADVICE_ID + " ");
+                System.Console.Write(monitorList[i].MONITOR_TYPE_ID + " ");
+                System.Console.Write(monitorList[i].MONITOE_PARA_ID + " ");
+                if (monitorList[i].PARA_UP_LIMIT.Equals(""))
+                {
+                    System.Console.Write("NULL ");
+                }
+                else System.Console.Write(monitorList[i].PARA_UP_LIMIT + " ");
+                if (monitorList[i].PARA_UP_ALERT.Equals(""))
+                {
+                    System.Console.Write("NULL ");
+                }
+                else System.Console.Write(monitorList[i].PARA_UP_ALERT + " ");
+                System.Console.Write(monitorList[i].PARA_DOWN_LIMIT + " ");
+                System.Console.WriteLine(monitorList[i].PARA_DOWN_ALERT + " ");
+            }
+            
+              
             cubeList = new List<CubeConrol>();
             CubeHelper cubeHelper = new CubeHelper(cubeNum);
       

@@ -29,6 +29,7 @@ namespace WindowsFormsApplication2
             PointF py2 = new PointF(move, newY);
             g.DrawLine(new Pen(Brushes.Gray, 2), py1, py2);
 
+            /*
             Console.WriteLine(px1);
             Console.WriteLine(px2);
             Console.WriteLine(py1);
@@ -41,7 +42,7 @@ namespace WindowsFormsApplication2
 
             Console.WriteLine(pan.Left);
             Console.WriteLine(pan.Right);
-
+            */
             Ybase = newY;
         }
 

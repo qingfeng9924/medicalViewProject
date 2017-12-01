@@ -48,6 +48,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CubeHelper.cs" />
+    <Compile Include="diviceInfo.cs" />
     <Compile Include="ECP.cs" />
     <Compile Include="Elliptical.cs" />
     <Compile Include="Helper.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="monitorInfo.cs" />
     <Compile Include="recumbentCycle.cs" />
     <Compile Include="RightSecondControl.cs">
       <SubType>UserControl</SubType>

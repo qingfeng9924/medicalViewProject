@@ -12,8 +12,9 @@ namespace WindowsFormsApplication2
     class SQLHelper
     {
         //数据库服务器
-        private string strCon = "Server=昔景;User= sa;Pwd=qingfeng;DataBase=SKHS";
-        
+        private string strCon = "Server=DESKTOP-V68FDEE;User=123;Pwd=123;DataBase=SKHS";
+        public int doctorAdviceId;
+
         //数据库操作参数
         SqlConnection sqlcon;
         SqlCommand sqlcmd;
@@ -25,8 +26,9 @@ namespace WindowsFormsApplication2
         }
 
         //构造函数
-        public SQLHelper()
+        public SQLHelper(int id)
         {
+            doctorAdviceId = id;
             sqlcon = new SqlConnection(strCon);
             sqlcmd = new SqlCommand();
             if (sqlcon.State == ConnectionState.Closed)
@@ -36,17 +38,26 @@ namespace WindowsFormsApplication2
             sqlcmd.Connection = sqlcon;
         }
         //数据库查询
-        public ArrayList sqlRead()
+        public List<monitorInfo> sqlReadMonitor()
         {
-            sqlcmd.CommandText = setsql("select * from TB_DOCTOR_ADVICE");
+            sqlcmd.CommandText = setsql("select * from TB_DOCTOR_ADVICE_MONITOR_ITEM where DOCTOR_ADVICE_ID=" + doctorAdviceId);
             sqldr = sqlcmd.ExecuteReader();
-            ArrayList list = new ArrayList();
-            sqldr.Read();
-            for (int i = 0; i < sqldr.FieldCount; i++)
+            List<monitorInfo> list = new List<monitorInfo>();
+            while(sqldr.Read())
             {
-                list.Add(sqldr[i]);
+                monitorInfo monitor = new monitorInfo();
+                monitor.DOCTOR_ADVICE_ID = sqldr["DOCTOR_ADVICE_ID"].ToString();
+                monitor.MONITOR_TYPE_ID = sqldr["MONITOR_TYPE_ID"].ToString();
+                monitor.MONITOE_PARA_ID = sqldr["MONITOR_PARA_ID"].ToString();
+                monitor.PARA_UP_LIMIT = sqldr["PARA_UP_LIMIT"].ToString();
+                monitor.PARA_UP_ALERT = sqldr["PARA_UP_ALERT"].ToString();
+                monitor.PARA_DOWN_LIMIT = sqldr["PARA_DOWN_LIMIT"].ToString();
+                monitor.PARA_DOWN_ALERT = sqldr["PARA_DOWN_ALERT"].ToString();
+
+                list.Add(monitor);
             }
                 return list;
         }
+
     }
 }
