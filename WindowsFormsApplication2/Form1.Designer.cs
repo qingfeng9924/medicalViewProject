@@ -115,9 +115,9 @@ namespace WindowsFormsApplication2
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         public void  reFresh()
-        { 
+        {
 
-}
+        }
         private void InitializeComponent()
         {
             //测试赋值
@@ -447,32 +447,66 @@ namespace WindowsFormsApplication2
              * 绘画
              * 
              **/
-            SQLHelper sqlHelper = new SQLHelper(303);
+            SQLHelper sqlHelper = new SQLHelper(307);
             List<monitorInfo> monitorList = sqlHelper.sqlReadMonitor();
-            
-            for (int i = 0; i < monitorList.Count;i++)
+            List<deviceInfo> deviceList = sqlHelper.sqlReaderDevice();
+            List<ExecuteOrder> orderList = new List<ExecuteOrder>();
+            orderList = sqlHelper.sqlReaderOrder();
+            int planId = orderList[2].EXERCISE_PLAN_ID;
+
+            /*
+            for (int i = 0; i < orderList.Count;i++ )
             {
-                System.Console.Write(monitorList[i].DOCTOR_ADVICE_ID + " ");
-                System.Console.Write(monitorList[i].MONITOR_TYPE_ID + " ");
-                System.Console.Write(monitorList[i].MONITOE_PARA_ID + " ");
-                if (monitorList[i].PARA_UP_LIMIT.Equals(""))
-                {
-                    System.Console.Write("NULL ");
-                }
-                else System.Console.Write(monitorList[i].PARA_UP_LIMIT + " ");
-                if (monitorList[i].PARA_UP_ALERT.Equals(""))
-                {
-                    System.Console.Write("NULL ");
-                }
-                else System.Console.Write(monitorList[i].PARA_UP_ALERT + " ");
-                System.Console.Write(monitorList[i].PARA_DOWN_LIMIT + " ");
-                System.Console.WriteLine(monitorList[i].PARA_DOWN_ALERT + " ");
+                System.Console.WriteLine(orderList[i]);
             }
-            
-              
+            */
+                /*
+                for (int i = 0; i < deviceList.Count;i++ )
+                {
+                    System.Console.Write(deviceList[i].EXERCISE_PLAN_ID + " ");
+                    System.Console.Write(deviceList[i].DEVICE_TYPE_ID + " ");
+                    System.Console.Write(deviceList[i].SECTION_ORDER + " ");
+                    System.Console.Write(deviceList[i].PARAMETER_ID + " ");
+                    System.Console.Write(deviceList[i].VALUE_IN_SECTION + " ");
+                    System.Console.Write(deviceList[i].MAX_VALUE + " ");
+                    System.Console.Write(deviceList[i].MIN_VALUE + " ");
+                    System.Console.WriteLine(deviceList[i].SECTION_NUM + " ");
+                }
+
+                
+                    for (int i = 0; i < monitorList.Count;i++)
+                    {
+                        System.Console.Write(monitorList[i].DOCTOR_ADVICE_ID + " ");
+                        System.Console.Write(monitorList[i].MONITOR_TYPE_ID + " ");
+                        System.Console.Write(monitorList[i].MONITOE_PARA_ID + " ");
+                        if (monitorList[i].PARA_UP_LIMIT.Equals(""))
+                        {
+                            System.Console.Write("NULL ");
+                        }
+                        else System.Console.Write(monitorList[i].PARA_UP_LIMIT + " ");
+                        if (monitorList[i].PARA_UP_ALERT.Equals(""))
+                        {
+                            System.Console.Write("NULL ");
+                        }
+                        else System.Console.Write(monitorList[i].PARA_UP_ALERT + " ");
+                        System.Console.Write(monitorList[i].PARA_DOWN_LIMIT + " ");
+                        System.Console.WriteLine(monitorList[i].PARA_DOWN_ALERT + " ");
+                    }
+                
+                */
             cubeList = new List<CubeConrol>();
+
+            deviceHelper devicehelper = new deviceHelper();
+            devicehelper.setCubeNum(deviceList, planId);
+            cubeNum = devicehelper.getCubeNum();
+            System.Console.WriteLine("cubeNum = " + cubeNum);
+
+            List<Treadmill> treadmillList = new List<Treadmill>();
+
+            devicehelper.setParameter(deviceList, planId);
+            
             CubeHelper cubeHelper = new CubeHelper(cubeNum);
-      
+
             cubeList = cubeHelper.getList();
             for (int i = cubeNum - 1; i >= 0; i--)
             {

@@ -51,6 +51,8 @@ namespace WindowsFormsApplication2
             }
         }
 
+
+
         public List<CubeConrol> getList()
         {
             return cubeList;

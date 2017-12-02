@@ -9,15 +9,15 @@ public class CubeConrol : UserControl
     private Image image;
     private Graphics graphics;
 
-    //
+    
     private System.Windows.Forms.Label label1;
     public int Base = 0;
     public bool isMove = false;
-    const int Band = 10;
+    const int Band = 20;
     public int MinWidth = 50;
     public int MinHeight = 50;
     public int MaxWidth = 300;
-    public int MaxHeight = 300;
+    public int MaxHeight = 350;
     private EnumMousePointPosition m_MousePointPosition;
     private Point p, p1;
 

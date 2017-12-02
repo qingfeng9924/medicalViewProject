@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication2
 {
+    /// <summary>
+    /// 跑步机
+    /// </summary>
     class Treadmill
     {
         private float curSpeed;
         private float upperSpeed;
         private float lowerSpeed;
-        private float distance;
-        private float Slope;
+        private float Time;
+        private int Slope;
 
         public void setCurSpeed(float speed)
         {
@@ -44,24 +48,29 @@ namespace WindowsFormsApplication2
             return lowerSpeed;
         }
 
-        public void setDistance(float dis)
+        public void setTime(float time)
         {
-            distance = dis;
+            Time = time;
         }
 
-        public float getDistance()
+        public float getTime()
         {
-            return distance;
+            return Time;
         }
 
-        public void setSlope(float slope)
+        public void setSlope(int slope)
         {
             Slope = slope;
         }
 
-        public float getSlope()
+        public int getSlope()
         {
             return Slope;
+        }
+
+        public int speedToHeight()
+        {
+            return (int)((curSpeed - 1) * 300 / 24);
         }
     }
 }
