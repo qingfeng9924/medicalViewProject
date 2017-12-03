@@ -6,45 +6,46 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication2
 {
+    //卧式健身车
     class recumbentCycle
     {
-        private float resistance;
-        private float upperResistance;
-        private float lowerResistance;
-        private float distance;
+        private int resistance;
+        private int upperResistance;
+        private int lowerResistance;
+        private int distance;
 
-        public void setResistance(float resis)
+        public void setResistance(int resis)
         {
             resistance = resis;
         }
-        public float getResistance()
+        public int getResistance()
         {
             return resistance;
         }
 
-        public void setUpperResistance(float resis)
+        public void setUpperResistance(int resis)
         {
             upperResistance = resis;
         }
-        public float getUpperResistance()
+        public int getUpperResistance()
         {
             return upperResistance;
         }
 
-        public void setLowerResistance(float resis)
+        public void setLowerResistance(int resis)
         {
             lowerResistance = resis;
         }
-        public float getLowerResistance()
+        public int getLowerResistance()
         {
             return lowerResistance;
         }
 
-        public void setDistance(float dis)
+        public void setDistance(int dis)
         {
             distance = dis;
         }
-        public float getDistance()
+        public int getDistance()
         {
             return distance;
         }

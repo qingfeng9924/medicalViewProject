@@ -8,7 +8,7 @@ namespace WindowsFormsApplication2
 {
     partial class Form1
     {
-        private List<CubeConrol> cubeList;
+        private List<CubeControl> cubeList;
         private int move = XYLinesFactory.getMove();
         private int cubeNum = 4;
      //   private Panel DrawPan = new Panel();
@@ -494,17 +494,100 @@ namespace WindowsFormsApplication2
                     }
                 
                 */
-            cubeList = new List<CubeConrol>();
 
             deviceHelper devicehelper = new deviceHelper();
             devicehelper.setCubeNum(deviceList, planId);
             cubeNum = devicehelper.getCubeNum();
             System.Console.WriteLine("cubeNum = " + cubeNum);
 
-            List<Treadmill> treadmillList = new List<Treadmill>();
+            //跑步机
+            if (devicehelper.getDeviceType(deviceList, planId) == 1)
+            {
+                List<Treadmill> treadmillList = devicehelper.setTreadmillParameter(deviceList, planId);
 
-            devicehelper.setParameter(deviceList, planId);
-            
+                cubeList = new List<CubeControl>();
+
+                for (int i = 0; i < cubeNum; i++)
+                {
+                    CubeControl cube = new CubeControl(100, 100);
+                    int time = treadmillList[i].getTime();
+                    int curSpeed = treadmillList[i].getCurSpeed();
+                    int upperSpeed = treadmillList[i].getUpperSpeed();
+                    int lowerSpeed = treadmillList[i].getLowerSpeed();
+                    cube.setTreadmillWidthHeight(time, curSpeed, upperSpeed, lowerSpeed);
+                    cubeList.Add(cube);
+                }
+
+                CubeHelper cubeHelper = new CubeHelper(cubeList);
+                cubeList = cubeHelper.getList();
+
+                for (int i = cubeNum - 1; i >= 0; i--)
+                {
+                    runMachPanel.Controls.Add(cubeList[i]);
+                    cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                    cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+                }
+
+
+                for (int i = 0; i < treadmillList.Count; i++)
+                {
+                    System.Console.WriteLine("跑步机：");
+                    System.Console.Write("时间：" + treadmillList[i].getTime() + " ");
+                    System.Console.Write("速度：" + treadmillList[i].getCurSpeed() + " ");
+                    System.Console.Write("速度上限：" + treadmillList[i].getUpperSpeed() + " ");
+                    System.Console.Write("速度下限：" + treadmillList[i].getLowerSpeed() + " ");
+                    System.Console.Write("坡度：" + treadmillList[i].getSlope() + " ");
+                    System.Console.Write("坡度上限：" + treadmillList[i].getUpperSlope() + " ");
+                    System.Console.WriteLine("坡度下限：" + treadmillList[i].getLowerSlope() + " ");
+                }
+            }
+
+            //椭圆机
+            else if (devicehelper.getDeviceType(deviceList, planId) == 3)
+            {
+                List<Elliptical> ellipticalList = devicehelper.setEllipticalParameter(deviceList, planId);
+
+                for (int i = 0; i < ellipticalList.Count; i++)
+                {
+                    System.Console.WriteLine("椭圆机：");
+                    System.Console.Write("距离：" + ellipticalList[i].getDistance() + " ");
+                    System.Console.Write("阻力：" + ellipticalList[i].getResistance() + " ");
+                    System.Console.Write("阻力上限：" + ellipticalList[i].getUpperResistance() + " ");
+                    System.Console.WriteLine("阻力下限：" + ellipticalList[i].getLowerResistance() + " ");
+                }
+            }
+
+            //立式健身车
+            else if (devicehelper.getDeviceType(deviceList, planId) == 13)
+            {
+                List<uprightCycle> uprightcycleList = devicehelper.setuprightCycleParameter(deviceList, planId);
+
+                for (int i = 0; i < uprightcycleList.Count; i++)
+                {
+                    System.Console.WriteLine("立式健身车：");
+                    System.Console.Write("距离：" + uprightcycleList[i].getDistance() + " ");
+                    System.Console.Write("阻力：" + uprightcycleList[i].getResistance() + " ");
+                    System.Console.Write("阻力上限：" + uprightcycleList[i].getUpperResistance() + " ");
+                    System.Console.WriteLine("阻力下限：" + uprightcycleList[i].getLowerResistance() + " ");
+                }
+            }
+
+            //卧式健身车
+            else if (devicehelper.getDeviceType(deviceList, planId) == 14)
+            {
+                List<recumbentCycle> recumbentcycleList = devicehelper.setrecumbentCycleParameter(deviceList, planId);
+
+                for (int i = 0; i < recumbentcycleList.Count; i++)
+                {
+                    System.Console.WriteLine("卧式健身车：");
+                    System.Console.Write("距离：" + recumbentcycleList[i].getDistance() + " ");
+                    System.Console.Write("阻力：" + recumbentcycleList[i].getResistance() + " ");
+                    System.Console.Write("阻力上限：" + recumbentcycleList[i].getUpperResistance() + " ");
+                    System.Console.WriteLine("阻力下限：" + recumbentcycleList[i].getLowerResistance() + " ");
+                }
+            }
+
+            /*
             CubeHelper cubeHelper = new CubeHelper(cubeNum);
 
             cubeList = cubeHelper.getList();
@@ -514,6 +597,7 @@ namespace WindowsFormsApplication2
                 cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
                 cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
             }
+              */
         //    this.runMachPanel.Location = new System.Drawing.Point(1, 1);
             this.runMachPanel.Name = "runMachPanel";
       //      this.runMachPanel.Size = new System.Drawing.Size(971, 481);

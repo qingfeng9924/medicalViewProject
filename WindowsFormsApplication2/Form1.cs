@@ -13,7 +13,7 @@ namespace WindowsFormsApplication2
 {
     public partial class Form1 : Form
     {
-        private CubeConrol cube;
+        private CubeControl cube;
         private Point p;
 
         public Form1()
@@ -102,7 +102,7 @@ namespace WindowsFormsApplication2
 
         private void cubeMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            cube = (sender as CubeConrol);
+            cube = (sender as CubeControl);
 
             if (e.Button == MouseButtons.Left)
             {

@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-public class CubeConrol : UserControl
+public class CubeControl : UserControl
 {
 
 
@@ -15,13 +15,13 @@ public class CubeConrol : UserControl
     public bool isMove = false;
     const int Band = 20;
     public int MinWidth = 50;
-    public int MinHeight = 50;
-    public int MaxWidth = 300;
-    public int MaxHeight = 350;
+    public int MinHeight = 100;
+    public int MaxWidth = 500;
+    public int MaxHeight = 345;
     private EnumMousePointPosition m_MousePointPosition;
     private Point p, p1;
 
-    public CubeConrol(int width, int height)
+    public CubeControl(int width, int height)
     {
         this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
         this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
@@ -36,9 +36,15 @@ public class CubeConrol : UserControl
         SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
     }
 
-    public void setWidth(int width, int height)
+    public void setTreadmillWidthHeight(int time, int curSpeed, int upperSpeed, int lowerSpeed)
     {
-
+        this.Width = (time / 60) * 5;
+        this.Height = 100 + (curSpeed / 100) * ((345 - 100) / (25 - 1));
+        //this.MaxHeight = 100 + (upperSpeed / 100) * ((350 - 30) / (25 - 1));
+        //this.MinHeight = (lowerSpeed / 100) * ((350 - 30) / (25 - 1));
+        this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
+        this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
+        this.Top = this.getBase() - this.Height;
     }
     protected override void OnPaint(PaintEventArgs e)
     {
@@ -154,7 +160,7 @@ public class CubeConrol : UserControl
     {
         m_MousePointPosition = EnumMousePointPosition.MouseSizeNone;
         this.Cursor = Cursors.Arrow;
-        CubeConrol lCtrl = (sender as CubeConrol);
+        CubeControl lCtrl = (sender as CubeControl);
         lCtrl.isMove = false;
     }
 
@@ -248,7 +254,7 @@ public class CubeConrol : UserControl
     private void MyMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
     {
 
-        CubeConrol lCtrl = (sender as CubeConrol);
+        CubeControl lCtrl = (sender as CubeControl);
        foreach(Control c in this.Parent.Controls)
        {
            c.Refresh();

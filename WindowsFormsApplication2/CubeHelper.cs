@@ -10,15 +10,15 @@ namespace WindowsFormsApplication2
 
     class CubeHelper
     {
-        private List<CubeConrol> cubeList;
+        private List<CubeControl> cubeList;
         private int cubeNum;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
         //        Form1 form = new Form1();
 
-        public CubeHelper(int num)
+        public CubeHelper(List<CubeControl> List)
         {
-            cubeList = new List<CubeConrol>();
-            cubeNum = num;
+            cubeList = List;
+            cubeNum = cubeList.Count;
             initList();
         }
 
@@ -26,7 +26,6 @@ namespace WindowsFormsApplication2
         {
             for (int i = 0; i < cubeNum; i++)
             {
-                cubeList.Add(new CubeConrol(100,200));
                 cubeList[i].Image = Image.FromFile("1.png");
                 if (i == 0)
                 {
@@ -53,7 +52,7 @@ namespace WindowsFormsApplication2
 
 
 
-        public List<CubeConrol> getList()
+        public List<CubeControl> getList()
         {
             return cubeList;
         }

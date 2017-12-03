@@ -12,48 +12,50 @@ namespace WindowsFormsApplication2
     /// </summary>
     class Treadmill
     {
-        private float curSpeed;
-        private float upperSpeed;
-        private float lowerSpeed;
-        private float Time;
+        private int curSpeed;
+        private int upperSpeed;
+        private int lowerSpeed;
+        private int Time;
         private int Slope;
+        private int upperSlope;
+        private int lowerSlope;
 
-        public void setCurSpeed(float speed)
+        public void setCurSpeed(int speed)
         {
             curSpeed = speed;
         }
 
-        public float getCurSpeed()
+        public int getCurSpeed()
         {
             return curSpeed;
         }
 
-        public void setUpperSpeed(float speed)
+        public void setUpperSpeed(int speed)
         {
             upperSpeed = speed;
         }
 
-        public float getUpperSpeed()
+        public int getUpperSpeed()
         {
             return upperSpeed;
         }
 
-        public void setLowerSpeed(float speed)
+        public void setLowerSpeed(int speed)
         {
             lowerSpeed = speed;
         }
 
-        public float getLowerSpeed()
+        public int getLowerSpeed()
         {
             return lowerSpeed;
         }
 
-        public void setTime(float time)
+        public void setTime(int time)
         {
             Time = time;
         }
 
-        public float getTime()
+        public int getTime()
         {
             return Time;
         }
@@ -67,6 +69,27 @@ namespace WindowsFormsApplication2
         {
             return Slope;
         }
+
+        public void setUpperSlope(int slope)
+        {
+            upperSlope = slope;
+        }
+
+        public int getUpperSlope()
+        {
+            return upperSlope;
+        }
+
+        public void setLowerSlope(int slope)
+        {
+            lowerSlope = slope;
+        }
+
+        public int getLowerSlope()
+        {
+            return lowerSlope;
+        }
+
 
         public int speedToHeight()
         {
