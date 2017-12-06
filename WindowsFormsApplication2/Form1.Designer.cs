@@ -587,6 +587,26 @@ namespace WindowsFormsApplication2
                 }
             }
 
+            //体外反搏
+            else if (devicehelper.getDeviceType(deviceList, planId) == 6)
+            {
+                List<ECP> ecpList = devicehelper.setecpParameter(deviceList, planId);
+
+                for (int i = 0; i < ecpList.Count; i++)
+                {
+                    System.Console.WriteLine("tiwaifanbo：");
+                    System.Console.Write("时间：" + ecpList[i].getTime() + " ");
+                    System.Console.Write("期望压力：" + ecpList[i].getExPressure() + " ");
+                    System.Console.Write("压力上限：" + ecpList[i].getUpperExPressure() + " ");
+                    System.Console.Write("压力下限：" + ecpList[i].getLowerExPressure() + " ");
+                    System.Console.Write("R2I偏移：" + ecpList[i].getR2I() + " ");
+                    System.Console.Write("R2I偏移上限：" + ecpList[i].getUpperR2I() + " ");
+                    System.Console.Write("R2I偏移下限：" + ecpList[i].getLowerR2I() + " ");
+                    System.Console.Write("R2D偏移：" + ecpList[i].getR2D() + " ");
+                    System.Console.Write("R2D偏移上限：" + ecpList[i].getUpperR2D() + " ");
+                    System.Console.WriteLine("R2D偏移下限：" + ecpList[i].getLowerR2D() + " ");
+                }
+            }
             /*
             CubeHelper cubeHelper = new CubeHelper(cubeNum);
 

@@ -6,70 +6,116 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication2
 {
+
+    //体外反搏
     class ECP
     {
-        private float exPressure;
-        private float upperExPressure;
-        private float lowerExPressure;
-        private float Time;
-        private float R2I_offset;
-        private float R2D_offset;
+        private int exPressure;
+        private int upperExPressure;
+        private int lowerExPressure;
+        private int Time;
+        private int R2I_offset;
+        private int upperR2I_offset;
+        private int lowerR2I_offset;
+        private int R2D_offset;
+        private int upperR2D_offset;
+        private int lowerR2D_offset;
 
-        public void setExPressure(float pressure)
+        public void setExPressure(int pressure)
         {
             exPressure = pressure;
         }
 
-        public float getExPressure()
+        public int getExPressure()
         {
             return exPressure;
         }
 
-        public void setUpperExPressure(float pressure)
+        public void setUpperExPressure(int pressure)
         {
             upperExPressure = pressure;
         }
 
-        public float getUpperExPressure()
+        public int getUpperExPressure()
         {
             return upperExPressure;
         }
 
-        public void setLowerExPressure(float pressure)
+        public void setLowerExPressure(int pressure)
         {
             lowerExPressure = pressure;
         }
 
-        public float getLowerExPressure()
+        public int getLowerExPressure()
         {
             return lowerExPressure;
         }
 
-        public void setTime(float time)
+        public void setTime(int time)
         {
             Time = time;
         }
-        public float getTime()
+        public int getTime()
         {
             return Time;
         }
 
-        public void setR2I(float offset)
+        public void setR2I(int offset)
         {
             R2I_offset = offset;
         }
-        public float getR2I()
+        public int getR2I()
         {
             return R2I_offset;
         }
 
-        public void setR2D(float offset)
+        public void setUpperR2I(int offset)
+        {
+            upperR2I_offset = offset;
+        }
+
+        public int getUpperR2I()
+        {
+            return upperR2I_offset;
+        }
+
+        public void setLowerR2I(int offset)
+        {
+            lowerR2I_offset = offset;
+        }
+
+        public int getLowerR2I()
+        {
+            return lowerR2I_offset;
+        }
+
+        public void setR2D(int offset)
         {
             R2D_offset = offset;
         }
-        public float getR2D()
+        public int getR2D()
         {
             return R2D_offset;
+        }
+
+        public void setUpperR2D(int offset)
+        {
+            upperR2D_offset = offset;
+        }
+
+        public int getUpperR2D()
+        {
+            return upperR2D_offset;
+        }
+
+        public void setLowerR2D(int offset)
+        {
+            lowerR2D_offset = offset;
+        }
+
+        public int getLowerR2D()
+        {
+            return lowerR2D_offset;
         }
     }
 }
