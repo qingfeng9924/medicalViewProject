@@ -10,7 +10,8 @@ namespace WindowsFormsApplication2
     {
         private List<CubeControl> cubeList;
         private int move = XYLinesFactory.getMove();
-        private int cubeNum = 4;
+        private int cubeNum;
+        private int Ybase;
      //   private Panel DrawPan = new Panel();
 
 
@@ -436,6 +437,7 @@ namespace WindowsFormsApplication2
             runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
             runMachPanel.Size = new Size(width,height-labelPanel.Location.Y-labelPanel.Height-20);
             runMachPanel.BackColor = Color.White;
+            
            // runMachPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPan_Paint);
                         
          //   runMachPanel.SuspendLayout();
@@ -518,7 +520,8 @@ namespace WindowsFormsApplication2
                     cubeList.Add(cube);
                 }
 
-                CubeHelper cubeHelper = new CubeHelper(cubeList);
+                Ybase = XYLinesFactory.getYbase(runMachPanel);
+                CubeHelper cubeHelper = new CubeHelper(cubeList, Ybase);
                 cubeList = cubeHelper.getList();
 
                 for (int i = cubeNum - 1; i >= 0; i--)
