@@ -39,6 +39,7 @@ namespace WindowsFormsApplication2
             }
             sqlcmd.Connection = sqlcon;
         }
+
         //数据库查询
         public List<monitorInfo> sqlReadMonitor()
         {
@@ -74,7 +75,7 @@ namespace WindowsFormsApplication2
                 return list;
         }
 
-
+        //根据医嘱号查询运动方案执行顺序
         public List<ExecuteOrder> sqlReaderOrder()
         {
             sqlcmd.CommandText = setsql("select * from TB_EXERCISE_PLAN where DOCTOR_ADVICE_ID=" + doctorAdviceId);
@@ -103,6 +104,7 @@ namespace WindowsFormsApplication2
                 return orderList;
         }
         
+        //根据医嘱号查询运动设备
         public List<deviceInfo> sqlReaderDevice()
         {
             sqlcmd.CommandText = setsql("select TB_EXERCISE_PLAN.DEVICE_TYPE_ID,TB_EXERCISE_PLAN.SECTION_NUM,TB_EXERCISE_PLAN_ITEM.EXERCISE_PLAN_ID,TB_EXERCISE_PLAN_ITEM.SECTION_ORDER,TB_EXERCISE_PLAN_ITEM.PARAMETER_ID,TB_EXERCISE_PLAN_ITEM.VALUE_IN_SECTION,TB_EXERCISE_PLAN_ITEM.MAX_VALUE,TB_EXERCISE_PLAN_ITEM.MIN_VALUE from TB_EXERCISE_PLAN_ITEM,TB_EXERCISE_PLAN where TB_EXERCISE_PLAN_ITEM.EXERCISE_PLAN_ID=TB_EXERCISE_PLAN.EXERCISE_PLAN_ID and TB_EXERCISE_PLAN.DOCTOR_ADVICE_ID=" + doctorAdviceId);

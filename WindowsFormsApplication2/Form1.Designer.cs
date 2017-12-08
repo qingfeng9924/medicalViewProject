@@ -456,46 +456,41 @@ namespace WindowsFormsApplication2
             orderList = sqlHelper.sqlReaderOrder();
             int planId = orderList[2].EXERCISE_PLAN_ID;
 
-            /*
-            for (int i = 0; i < orderList.Count;i++ )
+            for (int i = 0; i < monitorList.Count; i++) 
             {
-                System.Console.WriteLine(orderList[i]);
-            }
-            */
-                /*
-                for (int i = 0; i < deviceList.Count;i++ )
+                if (monitorList[i].MONITOE_PARA_ID.Equals("1")) 
                 {
-                    System.Console.Write(deviceList[i].EXERCISE_PLAN_ID + " ");
-                    System.Console.Write(deviceList[i].DEVICE_TYPE_ID + " ");
-                    System.Console.Write(deviceList[i].SECTION_ORDER + " ");
-                    System.Console.Write(deviceList[i].PARAMETER_ID + " ");
-                    System.Console.Write(deviceList[i].VALUE_IN_SECTION + " ");
-                    System.Console.Write(deviceList[i].MAX_VALUE + " ");
-                    System.Console.Write(deviceList[i].MIN_VALUE + " ");
-                    System.Console.WriteLine(deviceList[i].SECTION_NUM + " ");
+                    System.Console.WriteLine("血氧：");
+                    System.Console.Write("上限:" + monitorList[i].PARA_UP_LIMIT + " ");
+                    System.Console.Write("上限预警值:" + monitorList[i].PARA_UP_ALERT + " ");
+                    System.Console.Write("下限:" + monitorList[i].PARA_DOWN_LIMIT + " ");
+                    System.Console.WriteLine("下限预警值:" + monitorList[i].PARA_DOWN_ALERT + " ");
                 }
-
-                
-                    for (int i = 0; i < monitorList.Count;i++)
-                    {
-                        System.Console.Write(monitorList[i].DOCTOR_ADVICE_ID + " ");
-                        System.Console.Write(monitorList[i].MONITOR_TYPE_ID + " ");
-                        System.Console.Write(monitorList[i].MONITOE_PARA_ID + " ");
-                        if (monitorList[i].PARA_UP_LIMIT.Equals(""))
-                        {
-                            System.Console.Write("NULL ");
-                        }
-                        else System.Console.Write(monitorList[i].PARA_UP_LIMIT + " ");
-                        if (monitorList[i].PARA_UP_ALERT.Equals(""))
-                        {
-                            System.Console.Write("NULL ");
-                        }
-                        else System.Console.Write(monitorList[i].PARA_UP_ALERT + " ");
-                        System.Console.Write(monitorList[i].PARA_DOWN_LIMIT + " ");
-                        System.Console.WriteLine(monitorList[i].PARA_DOWN_ALERT + " ");
-                    }
-                
-                */
+                else if(monitorList[i].MONITOE_PARA_ID.Equals("2"))
+                {
+                    System.Console.WriteLine("舒张压");
+                    System.Console.Write("上限:" + monitorList[i].PARA_UP_LIMIT + " ");
+                    System.Console.Write("上限预警值:" + monitorList[i].PARA_UP_ALERT + " ");
+                    System.Console.Write("下限:" + monitorList[i].PARA_DOWN_LIMIT + " ");
+                    System.Console.WriteLine("下限预警值:" + monitorList[i].PARA_DOWN_ALERT + " ");
+                }
+                else if(monitorList[i].MONITOE_PARA_ID.Equals("3"))
+                {
+                    System.Console.WriteLine("收缩压");
+                    System.Console.Write("上限:" + monitorList[i].PARA_UP_LIMIT + " ");
+                    System.Console.Write("上限预警值:" + monitorList[i].PARA_UP_ALERT + " ");
+                    System.Console.Write("下限:" + monitorList[i].PARA_DOWN_LIMIT + " ");
+                    System.Console.WriteLine("下限预警值:" + monitorList[i].PARA_DOWN_ALERT + " ");
+                }
+                else if (monitorList[i].MONITOE_PARA_ID.Equals("4"))
+                {
+                    System.Console.WriteLine("心率");
+                    System.Console.Write("上限:" + monitorList[i].PARA_UP_LIMIT + " ");
+                    System.Console.Write("上限预警值:" + monitorList[i].PARA_UP_ALERT + " ");
+                    System.Console.Write("下限:" + monitorList[i].PARA_DOWN_LIMIT + " ");
+                    System.Console.WriteLine("下限预警值:" + monitorList[i].PARA_DOWN_ALERT + " ");
+                }
+            }
 
             deviceHelper devicehelper = new deviceHelper();
             devicehelper.setCubeNum(deviceList, planId);
