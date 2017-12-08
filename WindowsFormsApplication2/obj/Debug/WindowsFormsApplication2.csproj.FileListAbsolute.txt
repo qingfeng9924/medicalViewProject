@@ -30,3 +30,11 @@ C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\obj\De
 C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\yuan\Desktop\project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache
 D:\github_project\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.pdb
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csprojResolveAssemblyReference.cache
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Properties.Resources.resources
+C:\Users\yuan\Desktop\medicalViewproject\medicalViewProject\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.csproj.GenerateResource.Cache

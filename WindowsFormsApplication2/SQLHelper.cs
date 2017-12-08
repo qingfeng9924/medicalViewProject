@@ -12,7 +12,7 @@ namespace WindowsFormsApplication2
     class SQLHelper
     {
         //数据库服务器
-        private string strCon = "Server=DESKTOP-V68FDEE;User=123;Pwd=123;DataBase=SKHS";
+        private string strCon = "Server=DESKTOP-V68FDEE;User=昔景;Pwd=qingfeng;DataBase=SKHS";
         public int doctorAdviceId;
 
         //数据库操作参数
