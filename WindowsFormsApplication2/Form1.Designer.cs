@@ -10,7 +10,8 @@ namespace WindowsFormsApplication2
     {
         private List<CubeControl> cubeList;
         private int move = XYLinesFactory.getMove();
-        private int cubeNum = 4;
+        private int cubeNum;
+        private int Ybase;
      //   private Panel DrawPan = new Panel();
 
 
@@ -436,6 +437,7 @@ namespace WindowsFormsApplication2
             runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
             runMachPanel.Size = new Size(width,height-labelPanel.Location.Y-labelPanel.Height-20);
             runMachPanel.BackColor = Color.White;
+            
            // runMachPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPan_Paint);
                         
          //   runMachPanel.SuspendLayout();
@@ -518,7 +520,8 @@ namespace WindowsFormsApplication2
                     cubeList.Add(cube);
                 }
 
-                CubeHelper cubeHelper = new CubeHelper(cubeList);
+                Ybase = XYLinesFactory.getYbase(runMachPanel);
+                CubeHelper cubeHelper = new CubeHelper(cubeList, Ybase);
                 cubeList = cubeHelper.getList();
 
                 for (int i = cubeNum - 1; i >= 0; i--)
@@ -587,6 +590,26 @@ namespace WindowsFormsApplication2
                 }
             }
 
+            //体外反搏
+            else if (devicehelper.getDeviceType(deviceList, planId) == 6)
+            {
+                List<ECP> ecpList = devicehelper.setecpParameter(deviceList, planId);
+
+                for (int i = 0; i < ecpList.Count; i++)
+                {
+                    System.Console.WriteLine("tiwaifanbo：");
+                    System.Console.Write("时间：" + ecpList[i].getTime() + " ");
+                    System.Console.Write("期望压力：" + ecpList[i].getExPressure() + " ");
+                    System.Console.Write("压力上限：" + ecpList[i].getUpperExPressure() + " ");
+                    System.Console.Write("压力下限：" + ecpList[i].getLowerExPressure() + " ");
+                    System.Console.Write("R2I偏移：" + ecpList[i].getR2I() + " ");
+                    System.Console.Write("R2I偏移上限：" + ecpList[i].getUpperR2I() + " ");
+                    System.Console.Write("R2I偏移下限：" + ecpList[i].getLowerR2I() + " ");
+                    System.Console.Write("R2D偏移：" + ecpList[i].getR2D() + " ");
+                    System.Console.Write("R2D偏移上限：" + ecpList[i].getUpperR2D() + " ");
+                    System.Console.WriteLine("R2D偏移下限：" + ecpList[i].getLowerR2D() + " ");
+                }
+            }
             /*
             CubeHelper cubeHelper = new CubeHelper(cubeNum);
 

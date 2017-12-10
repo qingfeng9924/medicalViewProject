@@ -43,7 +43,6 @@ namespace WindowsFormsApplication2
             Console.WriteLine(pan.Left);
             Console.WriteLine(pan.Right);
             */
-            Ybase = newY;
         }
 
         public static void DrawYLine(Panel pan, float maxY, int len)
@@ -68,6 +67,11 @@ namespace WindowsFormsApplication2
         }
 
         public static int getMove() { return (int)move; }
-        public static int getYbase() { return (int)Ybase; }
+        //public static int getYbase() { return (int)Ybase; }
+        public static int getYbase(Panel pan) 
+        {
+            Ybase = pan.Height - move;
+            return (int)Ybase;
+        }
     }
 }

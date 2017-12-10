@@ -208,5 +208,57 @@ namespace WindowsFormsApplication2
             }
             return recumbentcycleList;
         }
+
+
+        //设置体外反搏参数
+        public List<ECP> setecpParameter(List<deviceInfo> deviceList, int planId)
+        {
+            List<ECP> ecpList = new List<ECP>();
+            int j = 1;
+            while (j <= cubeNum)
+            {
+                ECP ecp = new ECP();
+                for (int i = 0; i < deviceList.Count; i++)
+                {
+                    //判断是否是当前方案
+                    if (deviceList[i].EXERCISE_PLAN_ID.Equals(planId.ToString()))
+                    {
+                        //判断是否为当前段
+                        if (deviceList[i].SECTION_ORDER.Equals(j.ToString()))
+                        {
+                            //参数为体外反搏的时间
+                            if (deviceList[i].PARAMETER_ID.Equals("20"))
+                            {
+                                ecp.setTime(int.Parse(deviceList[i].VALUE_IN_SECTION));
+                            }
+                            //参数为体外反搏的期望压力
+                            else if (deviceList[i].PARAMETER_ID.Equals("23"))
+                            {
+                                ecp.setExPressure(int.Parse(deviceList[i].VALUE_IN_SECTION));
+                                ecp.setUpperExPressure(int.Parse(deviceList[i].MAX_VALUE));
+                                ecp.setLowerExPressure(int.Parse(deviceList[i].MIN_VALUE));
+                            }
+                            //参数为体外反搏的R2I偏移
+                            else if (deviceList[i].PARAMETER_ID.Equals("21"))
+                            {
+                                ecp.setR2I(int.Parse(deviceList[i].VALUE_IN_SECTION));
+                                ecp.setUpperR2I(int.Parse(deviceList[i].MAX_VALUE));
+                                ecp.setLowerR2I(int.Parse(deviceList[i].MIN_VALUE));
+                            }
+                            //参数为体外反搏的R2D偏移
+                            else if (deviceList[i].PARAMETER_ID.Equals("22"))
+                            {
+                                ecp.setR2D(int.Parse(deviceList[i].VALUE_IN_SECTION));
+                                ecp.setUpperR2D(int.Parse(deviceList[i].MAX_VALUE));
+                                ecp.setLowerR2D(int.Parse(deviceList[i].MIN_VALUE));
+                            }
+                        }
+                    }
+                }
+                ecpList.Add(ecp);
+                j++;
+            }
+            return ecpList;
+        }
     }
 }
