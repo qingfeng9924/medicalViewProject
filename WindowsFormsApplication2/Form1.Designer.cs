@@ -647,7 +647,11 @@ namespace WindowsFormsApplication2
 
             //runMachPanel.Controls.Add(testLabel);
             labelCase=new Label[deviceList.Count];
+<<<<<<< HEAD
             labelCase = this.generateCase(deviceList, orderList);
+=======
+            labelCase = this.generateCase(deviceList,orderList);
+>>>>>>> a3895d053ace2e7a3b9bb9b3a6adc9327057af02
             for (int i = 0; i < labelCase.Length;i++) 
             {
                 labelCase[i].MouseClick += new MouseEventHandler(addLabelCaseClickListener);
@@ -683,7 +687,11 @@ namespace WindowsFormsApplication2
         {
             return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         }
+<<<<<<< HEAD
         public Label[] generateCase( List<deviceInfo> List,List<ExecuteOrder> orderList)
+=======
+        public Label[] generateCase( List<deviceInfo> list,List<ExecuteOrder> orderList)
+>>>>>>> a3895d053ace2e7a3b9bb9b3a6adc9327057af02
         {
             int num = orderList.Count;
             if (num == 0)
@@ -701,18 +709,30 @@ namespace WindowsFormsApplication2
 
             for (int i = 0; i < num; i++) {
                 label[i] = new Label();
-               // label[i].Image = this.setImage(list[i].DEVICE_TYPE_ID);
+                if(labelSize==100)
+                {
+                    label[i].Location = new Point(i*(labelSize+10), 10);
+                }
+                else
+                {
                     if (i < num / 2)
                     {
-                        label[i].Location = new Point(i * (width / num+labelSize), 0);
+                        label[i].Location = new Point(i * (width / num + labelSize), 5);
                     }
                     else
                     {
-                        label[i].Location = new Point((i-num/2) * (width / num + labelSize), labelSize + 5);
+                        label[i].Location = new Point((i - num / 2) * (width / num + labelSize), labelSize + 10);
                     }
+                }
+                    
                 label[i].Size = new Size(labelSize, labelSize);
+<<<<<<< HEAD
                 label[i].Image = this.changeImgSize(labelSize - 1, labelSize - 1, this.setImage(List[i].DEVICE_TYPE_ID));
                 label[i].BackColor = Color.Red;
+=======
+                label[i].Image = this.changeImgSize(labelSize-1, labelSize-1, this.setImage(list[i].DEVICE_TYPE_ID));
+                //label[i].BackColor = Color.Red;
+>>>>>>> a3895d053ace2e7a3b9bb9b3a6adc9327057af02
                 label[i].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; 
             }
            // Console.WriteLine("---------------------------------------------"+label.Length);
@@ -759,7 +779,7 @@ namespace WindowsFormsApplication2
 
         public void addLabelCaseClickListener(object sender, EventArgs e)
         {
-            Console.WriteLine(((Label)sender).TabIndex);
+            
         }
 
         public void  addLabelCaseHoverListener(object sender, EventArgs e)
