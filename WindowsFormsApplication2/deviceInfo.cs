@@ -13,8 +13,8 @@ namespace WindowsFormsApplication2
         //  6---------体外反搏   20-------时间   21-------R2I偏移  22---------R2D偏移   23-----------期望压力
         //  13--------立式健身车  28------距离   31---------阻力（1-16）
         //  14--------卧式健身车  7-------距离   10-----------阻力（1-15）     
-
         public String EXERCISE_PLAN_ID;
+        //
         public String DEVICE_TYPE_ID;
         public String SECTION_ORDER;
         public String PARAMETER_ID;

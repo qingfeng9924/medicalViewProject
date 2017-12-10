@@ -60,6 +60,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="monitorHelper.cs" />
     <Compile Include="monitorInfo.cs" />
     <Compile Include="recumbentCycle.cs" />
     <Compile Include="RightSecondControl.cs">
