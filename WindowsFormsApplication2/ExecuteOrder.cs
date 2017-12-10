@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication2
 {
-    class ExecuteOrder
+    public class ExecuteOrder
     {
         public int EXECUTE_ORDER;
         public int EXERCISE_PLAN_ID;
+        public int DEVICE_TYPE_ID;
     }
 }

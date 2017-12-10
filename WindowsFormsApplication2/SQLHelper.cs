@@ -12,7 +12,7 @@ namespace WindowsFormsApplication2
     class SQLHelper
     {
         //数据库服务器
-        private string strCon = "Server=昔景;User=sa;Pwd=qingfeng;DataBase=SKHS";
+        private string strCon = "Server=DESKTOP-V68FDEE;User=123;Pwd=123;DataBase=SKHS";
         public int doctorAdviceId;
 
         //数据库操作参数
@@ -89,8 +89,12 @@ namespace WindowsFormsApplication2
                     ExecuteOrder order = new ExecuteOrder();
                     order.EXECUTE_ORDER = int.Parse(sqldrOrder["EXECUTE_ORDER"].ToString());
                     order.EXERCISE_PLAN_ID = int.Parse(sqldrOrder["EXERCISE_PLAN_ID"].ToString());
+                    order.DEVICE_TYPE_ID = int.Parse(sqldrOrder["DEVICE_TYPE_ID"].ToString());
                     orderList.Add(order);
                     num++;
+                    System.Console.Write("执行顺序：" + order.EXECUTE_ORDER);
+                    System.Console.Write("方案ID：" + order.EXERCISE_PLAN_ID);
+                    System.Console.WriteLine("设备：" + order.DEVICE_TYPE_ID);
                 }
                 System.Console.WriteLine("Exercise_num:" + num);
                 sortForOrder(orderList);

@@ -647,7 +647,7 @@ namespace WindowsFormsApplication2
 
             //runMachPanel.Controls.Add(testLabel);
             labelCase=new Label[deviceList.Count];
-            labelCase = this.generateCase(deviceList);
+            labelCase = this.generateCase(deviceList, orderList);
             for (int i = 0; i < labelCase.Length;i++) 
             {
                 labelCase[i].MouseClick += new MouseEventHandler(addLabelCaseClickListener);
@@ -677,15 +677,15 @@ namespace WindowsFormsApplication2
         }
         public static int getScreeWidth()
         {
-            return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width; ;
+            return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         }
         public static  int getScreeHeight()
         {
-            return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height; ;
+            return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         }
-        public Label[] generateCase( List<deviceInfo> list)
+        public Label[] generateCase( List<deviceInfo> List,List<ExecuteOrder> orderList)
         {
-            int num = list.Count;
+            int num = orderList.Count;
             if (num == 0)
                 return null;
             int labelSize=0;
@@ -711,7 +711,7 @@ namespace WindowsFormsApplication2
                         label[i].Location = new Point((i-num/2) * (width / num + labelSize), labelSize + 5);
                     }
                 label[i].Size = new Size(labelSize, labelSize);
-                label[i].Image = this.changeImgSize(labelSize-1, labelSize-1, this.setImage(list[i].DEVICE_TYPE_ID));
+                label[i].Image = this.changeImgSize(labelSize - 1, labelSize - 1, this.setImage(List[i].DEVICE_TYPE_ID));
                 label[i].BackColor = Color.Red;
                 label[i].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; 
             }
