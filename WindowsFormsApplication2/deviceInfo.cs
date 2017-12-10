@@ -14,15 +14,13 @@ namespace WindowsFormsApplication2
         //  13--------立式健身车  28------距离   31---------阻力（1-16）
         //  14--------卧式健身车  7-------距离   10-----------阻力（1-15）     
 
-        public String EXERCISE_PLAN_ID;
-        public String DEVICE_TYPE_ID;
-        public String SECTION_ORDER;
-        public String PARAMETER_ID;
-        public String VALUE_IN_SECTION;
-        public String MAX_VALUE;
-        public String MIN_VALUE;
-        public String SECTION_NUM;
-
-
+        public String EXERCISE_PLAN_ID;  //运动方案ID
+        public String DEVICE_TYPE_ID;    //设备类型ID
+        public String SECTION_ORDER;     //执行顺序号
+        public String PARAMETER_ID;      //参数ID
+        public String VALUE_IN_SECTION;  //该段该参数值
+        public String MAX_VALUE;         //该段该参数最大值
+        public String MIN_VALUE;         //该段该参数最小值
+        public String SECTION_NUM;       //该方案段数
     }
 }
