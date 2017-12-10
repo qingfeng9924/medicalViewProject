@@ -12,6 +12,7 @@ namespace WindowsFormsApplication2
         private int move = XYLinesFactory.getMove();
         private int cubeNum;
         private int Ybase;
+        public List<deviceInfo> deviceList;
      //   private Panel DrawPan = new Panel();
 
 
@@ -55,8 +56,9 @@ namespace WindowsFormsApplication2
         //4个Image
         System.Drawing.Image runningMach_Image = System.Drawing.Image.FromFile("runningMach.png");
         System.Drawing.Image ovalMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
-       // System.Drawing.Image runningMach_Image = System.Drawing.Image.FromFile("runningMach.png");
-       // System.Drawing.Image ovalMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
+        System.Drawing.Image standMach_Image = System.Drawing.Image.FromFile("runningMach.png");
+        System.Drawing.Image lieMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
+        System.Drawing.Image twfbMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
 
 
         Panel boPanel;
@@ -91,7 +93,7 @@ namespace WindowsFormsApplication2
         Panel labelPanel;
 
 
-
+        Label[] labelCase;
 
 
         //选择的label
@@ -388,13 +390,9 @@ namespace WindowsFormsApplication2
 
 
 
-            this.Controls.Add(labelPanel);
-            this.Controls.Add(infoPanel);
-            this.Controls.Add(topPanel);
-
 
             
-
+            /*
             //跑步机label
             label_runMach = new System.Windows.Forms.Label();
           //  label_runMach.Text = "跑步机";
@@ -432,7 +430,8 @@ namespace WindowsFormsApplication2
             label_lieByc.Image = ovalMach_Image;
             labelPanel.Controls.Add(label_lieByc);
 
-
+            **/
+           
             runMachPanel = new DrawPanel();
             runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
             runMachPanel.Size = new Size(width,height-labelPanel.Location.Y-labelPanel.Height-20);
@@ -453,7 +452,7 @@ namespace WindowsFormsApplication2
             //监护参数
             List<monitorInfo> monitorList = sqlHelper.sqlReadMonitor();
             //运动方案
-            List<deviceInfo> deviceList = sqlHelper.sqlReaderDevice();
+            deviceList = sqlHelper.sqlReaderDevice();
             //执行顺序
             List<ExecuteOrder> orderList = new List<ExecuteOrder>();
             orderList = sqlHelper.sqlReaderOrder();
@@ -494,7 +493,6 @@ namespace WindowsFormsApplication2
                     System.Console.WriteLine("下限预警值:" + monitorList[i].PARA_DOWN_ALERT + " ");
                 }
             }
-
             deviceHelper devicehelper = new deviceHelper();
             devicehelper.setCubeNum(deviceList, planId);
             cubeNum = devicehelper.getCubeNum();
@@ -629,6 +627,8 @@ namespace WindowsFormsApplication2
 
             this.Controls.Add(this.runMachPanel);
 
+
+            /*
             //设置监听
             label_runMach.MouseHover += new System.EventHandler(label_runMach_MouseHover);
             label_runMach.MouseLeave += new System.EventHandler(label_runMach_MouseLeave);
@@ -638,7 +638,7 @@ namespace WindowsFormsApplication2
             label_stByc.MouseLeave += new System.EventHandler(label_stByc_MouseLeave);
             label_lieByc.MouseHover += new System.EventHandler(label_lieByc_MouseHover);
             label_lieByc.MouseLeave += new System.EventHandler(label_lieByc_MouseLeave);
-
+            */
             ///
 
 
@@ -646,9 +646,22 @@ namespace WindowsFormsApplication2
 
 
             //runMachPanel.Controls.Add(testLabel);
+            labelCase=new Label[deviceList.Count];
+            labelCase = this.generateCase(deviceList);
+            for (int i = 0; i < labelCase.Length;i++) 
+            {
+                labelCase[i].MouseClick += new MouseEventHandler(addLabelCaseClickListener);
+                labelCase[i].MouseEnter += new EventHandler(addLabelCaseHoverListener);
+                labelCase[i].MouseLeave += new EventHandler(addLabelCaseLeaveListener);
+                labelPanel.Controls.Add(labelCase[i]);
+                
+            }
+            Console.WriteLine("---------------------------"+labelCase.Length);
+            labelPanel.BackColor = Color.Beige;
+            this.Controls.Add(labelPanel);
+            this.Controls.Add(infoPanel);
+            this.Controls.Add(topPanel);
 
-
-            
             //this.Controls.Add(runMachPanel);
             this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             //设置窗体大小不能被改变
@@ -670,18 +683,94 @@ namespace WindowsFormsApplication2
         {
             return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height; ;
         }
-        public void generateCase(int num)
+        public Label[] generateCase( List<deviceInfo> list)
         {
-            Label []labelCase=new Label[num];
-            for (int i = 0; i < num; i++) {
-                labelCase[i] = new Label();
+            int num = list.Count;
+            if (num == 0)
+                return null;
+            int labelSize=0;
+            if (width/num > lpWidth)
+            {
+                labelSize = lpWidth;
             }
+            else
+            {
+                labelSize = width / num;
+            }
+            Label []label=new Label[num];
+
+            for (int i = 0; i < num; i++) {
+                label[i] = new Label();
+               // label[i].Image = this.setImage(list[i].DEVICE_TYPE_ID);
+                    if (i < num / 2)
+                    {
+                        label[i].Location = new Point(i * (width / num+labelSize), 0);
+                    }
+                    else
+                    {
+                        label[i].Location = new Point((i-num/2) * (width / num + labelSize), labelSize + 5);
+                    }
+                label[i].Size = new Size(labelSize, labelSize);
+                label[i].Image = this.changeImgSize(labelSize-1, labelSize-1, this.setImage(list[i].DEVICE_TYPE_ID));
+                label[i].BackColor = Color.Red;
+                label[i].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; 
+            }
+           // Console.WriteLine("---------------------------------------------"+label.Length);
+            return label;
         }
         //判断是那张标识图片
+        /*
+         * 
+        **/
         public Image setImage(String id)
         {
-            
+            Image image=null;
+            int tempId = int.Parse(id);
+            switch(tempId)
+            {
+                case 1:
+                    image = runningMach_Image;
+                    break;
+                case 3:
+                    image = ovalMach_Image;
+                    break;
+                case 6:
+                    image = standMach_Image;
+                    break;
+                case 13:
+                    image = standMach_Image;
+                    break;
+                case 14:
+                    image = lieMach_Image;
+                    break;
+                default:
+                    break;
+            }
+            return image;
         }
+        public Image changeImgSize(int width,int height,Image img)
+        {
+            Bitmap b = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage((Image)b);
+            g.DrawImage(img,0,0,width,height);
+            g.Dispose();
+            return b;
+        }
+
+        public void addLabelCaseClickListener(object sender, EventArgs e)
+        {
+            Console.WriteLine(((Label)sender).TabIndex);
+        }
+
+        public void  addLabelCaseHoverListener(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Hand; 
+        }
+        public void  addLabelCaseLeaveListener(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+
         #endregion
     }
     //绘画panel
