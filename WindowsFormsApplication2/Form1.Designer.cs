@@ -13,6 +13,10 @@ namespace WindowsFormsApplication2
         private int cubeNum;
         private int Ybase;
         public List<deviceInfo> deviceList;
+        private List<ExecuteOrder> orderList;
+        private deviceHelper devicehelper;
+        private CubeHelper cubeHelper;
+        private CubeControl newCube;
      //   private Panel DrawPan = new Panel();
 
 
@@ -54,11 +58,11 @@ namespace WindowsFormsApplication2
         //绘画panel
         DrawPanel runMachPanel, ovalMachPanel, lieBycPanel, stBycPanel;
         //4个Image
-        System.Drawing.Image runningMach_Image = System.Drawing.Image.FromFile("runningMach.png");
-        System.Drawing.Image ovalMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
-        System.Drawing.Image standMach_Image = System.Drawing.Image.FromFile("runningMach.png");
-        System.Drawing.Image lieMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
-        System.Drawing.Image twfbMach_Image = System.Drawing.Image.FromFile("ovalMach.png");
+        System.Drawing.Image Treadmill_Image = System.Drawing.Image.FromFile("Treadmill.png");     //跑步机
+        System.Drawing.Image Elliptical_Image = System.Drawing.Image.FromFile("Elliptical.png");       //椭圆机
+        System.Drawing.Image uprightCycle_Image = System.Drawing.Image.FromFile("uprightCycle.png");  //立式健身车
+        System.Drawing.Image recumbentCycle_Image = System.Drawing.Image.FromFile("recumbentCycle.png");   //卧式健身车
+        System.Drawing.Image ECP_Image = System.Drawing.Image.FromFile("ECP.png");              //体外反搏
 
 
         Panel boPanel;
@@ -454,9 +458,9 @@ namespace WindowsFormsApplication2
             //运动方案
             deviceList = sqlHelper.sqlReaderDevice();
             //执行顺序
-            List<ExecuteOrder> orderList = new List<ExecuteOrder>();
+            orderList = new List<ExecuteOrder>();
             orderList = sqlHelper.sqlReaderOrder();
-            int planId = orderList[2].EXERCISE_PLAN_ID;
+            int planId = orderList[0].EXERCISE_PLAN_ID;
 
             for (int i = 0; i < monitorList.Count; i++) 
             {
@@ -493,16 +497,18 @@ namespace WindowsFormsApplication2
                     System.Console.WriteLine("下限预警值:" + monitorList[i].PARA_DOWN_ALERT + " ");
                 }
             }
-            deviceHelper devicehelper = new deviceHelper();
-            devicehelper.setCubeNum(deviceList, planId);
-            cubeNum = devicehelper.getCubeNum();
-            System.Console.WriteLine("cubeNum = " + cubeNum);
+            devicehelper = new deviceHelper();
+           // devicehelper.setCubeNum(deviceList, planId);
+            //cubeNum = devicehelper.getCubeNum();
+            //System.Console.WriteLine("cubeNum = " + cubeNum);
 
             //跑步机
             if (devicehelper.getDeviceType(deviceList, planId) == 1)
             {
+                
                 List<Treadmill> treadmillList = devicehelper.setTreadmillParameter(deviceList, planId);
 
+                /*
                 cubeList = new List<CubeControl>();
 
                 for (int i = 0; i < cubeNum; i++)
@@ -516,8 +522,8 @@ namespace WindowsFormsApplication2
                     cubeList.Add(cube);
                 }
 
-                Ybase = XYLinesFactory.getYbase(runMachPanel);
-                CubeHelper cubeHelper = new CubeHelper(cubeList, Ybase);
+                
+                cubeHelper = new CubeHelper(cubeList, Ybase);
                 cubeList = cubeHelper.getList();
 
                 for (int i = cubeNum - 1; i >= 0; i--)
@@ -526,7 +532,7 @@ namespace WindowsFormsApplication2
                     cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
                     cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
                 }
-
+                */
 
                 for (int i = 0; i < treadmillList.Count; i++)
                 {
@@ -647,11 +653,8 @@ namespace WindowsFormsApplication2
 
             //runMachPanel.Controls.Add(testLabel);
             labelCase=new Label[deviceList.Count];
-<<<<<<< HEAD
-            labelCase = this.generateCase(deviceList, orderList);
-=======
-            labelCase = this.generateCase(deviceList,orderList);
->>>>>>> a3895d053ace2e7a3b9bb9b3a6adc9327057af02
+            labelCase = this.generateCase(orderList);
+            //labelCase = this.generateCase(deviceList,orderList);
             for (int i = 0; i < labelCase.Length;i++) 
             {
                 labelCase[i].MouseClick += new MouseEventHandler(addLabelCaseClickListener);
@@ -687,11 +690,7 @@ namespace WindowsFormsApplication2
         {
             return System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         }
-<<<<<<< HEAD
-        public Label[] generateCase( List<deviceInfo> List,List<ExecuteOrder> orderList)
-=======
-        public Label[] generateCase( List<deviceInfo> list,List<ExecuteOrder> orderList)
->>>>>>> a3895d053ace2e7a3b9bb9b3a6adc9327057af02
+        public Label[] generateCase(List<ExecuteOrder> orderList)
         {
             int num = orderList.Count;
             if (num == 0)
@@ -726,13 +725,10 @@ namespace WindowsFormsApplication2
                 }
                     
                 label[i].Size = new Size(labelSize, labelSize);
-<<<<<<< HEAD
-                label[i].Image = this.changeImgSize(labelSize - 1, labelSize - 1, this.setImage(List[i].DEVICE_TYPE_ID));
+                label[i].Image = this.changeImgSize(labelSize - 1, labelSize - 1, this.setImage(orderList[i].DEVICE_TYPE_ID.ToString()));
                 label[i].BackColor = Color.Red;
-=======
-                label[i].Image = this.changeImgSize(labelSize-1, labelSize-1, this.setImage(list[i].DEVICE_TYPE_ID));
+               // label[i].Image = this.changeImgSize(labelSize-1, labelSize-1, this.setImage(list[i].DEVICE_TYPE_ID));
                 //label[i].BackColor = Color.Red;
->>>>>>> a3895d053ace2e7a3b9bb9b3a6adc9327057af02
                 label[i].BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle; 
             }
            // Console.WriteLine("---------------------------------------------"+label.Length);
@@ -749,19 +745,19 @@ namespace WindowsFormsApplication2
             switch(tempId)
             {
                 case 1:
-                    image = runningMach_Image;
+                    image = Treadmill_Image;
                     break;
                 case 3:
-                    image = ovalMach_Image;
+                    image = Elliptical_Image;
                     break;
                 case 6:
-                    image = standMach_Image;
+                    image = ECP_Image;
                     break;
                 case 13:
-                    image = standMach_Image;
+                    image = uprightCycle_Image;
                     break;
                 case 14:
-                    image = lieMach_Image;
+                    image = recumbentCycle_Image;
                     break;
                 default:
                     break;
@@ -779,8 +775,134 @@ namespace WindowsFormsApplication2
 
         public void addLabelCaseClickListener(object sender, EventArgs e)
         {
-            
+            runMachPanel.Controls.Clear();
+            int index = ((Label)sender).TabIndex;
+            int deviceType = orderList[index].DEVICE_TYPE_ID;
+            int planId = orderList[index].EXERCISE_PLAN_ID;
+            devicehelper.setCubeNum(deviceList, planId);
+            cubeNum = devicehelper.getCubeNum();
+            System.Console.WriteLine("cubeNum = " + cubeNum);
+            cubeList = new List<CubeControl>();
+            Ybase = XYLinesFactory.getYbase(runMachPanel);
+          //  cubeHelper = new CubeHelper(cubeList, Ybase);
+          //  cubeList = cubeHelper.getList();
+            switch(deviceType)
+            {
+                case 1:
+                    List<Treadmill> treadmillList = devicehelper.setTreadmillParameter(deviceList, planId);
+                    for (int i = 0; i < cubeNum; i++)
+                    {
+                        newCube = new CubeControl(100, 100);
+                        int time = treadmillList[i].getTime();
+                        int curSpeed = treadmillList[i].getCurSpeed();
+                        int upperSpeed = treadmillList[i].getUpperSpeed();
+                        int lowerSpeed = treadmillList[i].getLowerSpeed();
+                        newCube.setTreadmillWidthHeight(time, curSpeed, upperSpeed, lowerSpeed);
+                        cubeList.Add(newCube);
+                    }
+                    cubeHelper = new CubeHelper(cubeList, Ybase);
+                    cubeList = cubeHelper.getList();
+                    for (int i = cubeNum - 1; i >= 0; i--)
+                    {
+                        runMachPanel.Controls.Add(cubeList[i]);
+                        cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                        cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+                    }
+                    break;
+
+                case 3:
+                    List<Elliptical> ellipticalList = devicehelper.setEllipticalParameter(deviceList, planId);
+                    for (int i = 0; i < cubeNum; i++)
+                    {
+                        newCube = new CubeControl(100, 100);
+                        int distance = ellipticalList[i].getDistance();
+                        int resistance = ellipticalList[i].getResistance();
+                        int upperResistance = ellipticalList[i].getUpperResistance();
+                        int lowerResistance = ellipticalList[i].getLowerResistance();
+                        newCube.setEllipticalWidthHeight(distance, resistance, upperResistance, lowerResistance);
+                        cubeList.Add(newCube);
+                    }
+                    cubeHelper = new CubeHelper(cubeList, Ybase);
+                    cubeList = cubeHelper.getList();
+                    for (int i = cubeNum - 1; i >= 0; i--)
+                    {
+                        runMachPanel.Controls.Add(cubeList[i]);
+                        cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                        cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+                    }
+                    break;
+                case 13:
+                    List<uprightCycle> uprightCycleList = devicehelper.setuprightCycleParameter(deviceList, planId);
+                    for (int i = 0; i < cubeNum; i++)
+                    {
+                        newCube = new CubeControl(100, 100);
+                        int distance = uprightCycleList[i].getDistance();
+                        int resistance = uprightCycleList[i].getResistance();
+                        int upperResistance = uprightCycleList[i].getUpperResistance();
+                        int lowerResistance = uprightCycleList[i].getLowerResistance();
+                        newCube.setUprightCycleWidthHeight(distance, resistance, upperResistance, lowerResistance);
+                        cubeList.Add(newCube);
+                    }
+                    cubeHelper = new CubeHelper(cubeList, Ybase);
+                    cubeList = cubeHelper.getList();
+                    for (int i = cubeNum - 1; i >= 0; i--)
+                    {
+                        runMachPanel.Controls.Add(cubeList[i]);
+                        cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                        cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+                    }
+
+                    break;
+
+                case 14:
+                    List<recumbentCycle> recumbentCycleList = devicehelper.setrecumbentCycleParameter(deviceList, planId);
+                    for (int i = 0; i < cubeNum; i++)
+                    {
+                        newCube = new CubeControl(100, 100);
+                        int distance = recumbentCycleList[i].getDistance();
+                        int resistance = recumbentCycleList[i].getResistance();
+                        int upperResistance = recumbentCycleList[i].getUpperResistance();
+                        int lowerResistance = recumbentCycleList[i].getLowerResistance();
+                        newCube.setRecumbentCycleWidthHeight(distance, resistance, upperResistance, lowerResistance);
+                        cubeList.Add(newCube);
+                    }
+                    cubeHelper = new CubeHelper(cubeList, Ybase);
+                    cubeList = cubeHelper.getList();
+                    for (int i = cubeNum - 1; i >= 0; i--)
+                    {
+                        runMachPanel.Controls.Add(cubeList[i]);
+                        cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                        cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+                    }
+
+                    break;
+
+                case 6:
+                    List<ECP> ecpList = devicehelper.setecpParameter(deviceList, planId);
+                    for (int i = 0; i < cubeNum; i++)
+                    {
+                        newCube = new CubeControl(100, 100);
+                        int time = ecpList[i].getTime();
+                        int exPressure = ecpList[i].getExPressure();
+                        int upperExPressure = ecpList[i].getUpperExPressure();
+                        int lowerExPressure = ecpList[i].getLowerExPressure();
+                        newCube.setECPWidthHeight(time, exPressure, upperExPressure, lowerExPressure);
+                        cubeList.Add(newCube);
+                    }
+                    cubeHelper = new CubeHelper(cubeList, Ybase);
+                    cubeList = cubeHelper.getList();
+                    for (int i = cubeNum - 1; i >= 0; i--)
+                    {
+                        runMachPanel.Controls.Add(cubeList[i]);
+                        cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
+                        cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
+                    }
+
+                    break;
+            }
+
         }
+
 
         public void  addLabelCaseHoverListener(object sender, EventArgs e)
         {

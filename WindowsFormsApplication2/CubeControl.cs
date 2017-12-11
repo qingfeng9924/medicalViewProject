@@ -40,12 +40,57 @@ public class CubeControl : UserControl
     {
         this.Width = (time / 60) * 5;
         this.Height = 100 + (curSpeed / 100) * ((345 - 100) / (25 - 1));
-        //this.MaxHeight = 100 + (upperSpeed / 100) * ((350 - 30) / (25 - 1));
-        //this.MinHeight = (lowerSpeed / 100) * ((350 - 30) / (25 - 1));
+        this.MaxHeight = 100 + (upperSpeed / 100) * ((345 - 100) / (25 - 1));
+        this.MinHeight = 100 + (lowerSpeed / 100) * ((345 - 100) / (25 - 1));
         this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
         this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
         this.Top = this.getBase() - this.Height;
     }
+
+    public void setEllipticalWidthHeight(int distance,int resistance,int upperResistance,int lowerResistance)
+    {
+        this.Width = distance / 2;
+        this.Height = 100 + resistance * (345 - 100) / (15 - 1);
+        this.MaxHeight = 100 + upperResistance * (345 - 100) / (15 - 1);
+        this.MinHeight = 100 + lowerResistance * (345 - 100) / (15 - 1);
+        this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
+        this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
+        this.Top = this.getBase() - this.Height;
+    }
+
+    public void setUprightCycleWidthHeight(int distance,int resistance,int upperResistance,int lowerResistance)
+    {
+        this.Width = distance / 2;
+        this.Height = 100 + resistance * (345 - 100) / (15 - 1);
+        this.MaxHeight = 100 + upperResistance * (345 - 100) / (15 - 1);
+        this.MinHeight = 100 + lowerResistance * (345 - 100) / (15 - 1);
+        this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
+        this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
+        this.Top = this.getBase() - this.Height;
+    }
+
+    public void setRecumbentCycleWidthHeight(int distance,int resistance,int upperResistance,int lowerResistance)
+    {
+        this.Width = distance / 2;
+        this.Height = 100 + resistance * (345 - 100) / (15 - 1);
+        this.MaxHeight = 100 + upperResistance * (345 - 100) / (15 - 1);
+        this.MinHeight = 100 + lowerResistance * (345 - 100) / (15 - 1);
+        this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
+        this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
+        this.Top = this.getBase() - this.Height;
+    }
+
+    public void setECPWidthHeight(int time, int exPressure, int upperExPressure, int lowerExPressure)
+    {
+        this.Width = (time / 60) * 10;
+        this.Height = 100 + exPressure * (345 - 100) / (70 - 1);
+        this.MaxHeight = 100 + upperExPressure * (345 - 100) / (70 - 1);
+        this.MinHeight = 100 + lowerExPressure * (345 - 100) / (70 - 1);
+        this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
+        this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
+        this.Top = this.getBase() - this.Height;
+    }
+
     protected override void OnPaint(PaintEventArgs e)
     {
         var bitMap = new Bitmap(image);
