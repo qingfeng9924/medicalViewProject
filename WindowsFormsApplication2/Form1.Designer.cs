@@ -17,6 +17,20 @@ namespace WindowsFormsApplication2
         private deviceHelper devicehelper;
         private CubeHelper cubeHelper;
         private CubeControl newCube;
+        private Label txDeviceType;
+        private Label txDeviceTypeName;
+        private Label txSection;
+        private Label txSectionNumber;
+        private Label txParameter1;
+        private NumericUpDown numberParameter1;
+        private Label txParameter2;
+        private NumericUpDown numberParameter2;
+        private Label txParameter3;
+        private NumericUpDown numberParameter3;
+        private Label txParameter4;
+        private NumericUpDown numberParameter4;
+
+        private int deviceTypeDisplayNow;
      //   private Panel DrawPan = new Panel();
 
 
@@ -438,9 +452,9 @@ namespace WindowsFormsApplication2
            
             runMachPanel = new DrawPanel();
             runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
-            runMachPanel.Size = new Size(width,height-labelPanel.Location.Y-labelPanel.Height-20);
+            runMachPanel.Size = new Size(width - 300, height - labelPanel.Location.Y - labelPanel.Height - 20);
             runMachPanel.BackColor = Color.White;
-            
+
            // runMachPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPan_Paint);
                         
          //   runMachPanel.SuspendLayout();
@@ -775,6 +789,19 @@ namespace WindowsFormsApplication2
 
         public void addLabelCaseClickListener(object sender, EventArgs e)
         {
+            this.Controls.Remove(txDeviceType);
+            this.Controls.Remove(txDeviceTypeName);
+            this.Controls.Remove(txSection);
+            this.Controls.Remove(txSectionNumber);
+            this.Controls.Remove(txParameter1);
+            this.Controls.Remove(txParameter2);
+            this.Controls.Remove(txParameter3);
+            this.Controls.Remove(txParameter4);
+            this.Controls.Remove(numberParameter1);
+            this.Controls.Remove(numberParameter2);
+            this.Controls.Remove(numberParameter3);
+            this.Controls.Remove(numberParameter4);
+
             runMachPanel.Controls.Clear();
             int index = ((Label)sender).TabIndex;
             int deviceType = orderList[index].DEVICE_TYPE_ID;
@@ -789,6 +816,7 @@ namespace WindowsFormsApplication2
             switch(deviceType)
             {
                 case 1:
+                    deviceTypeDisplayNow = 1;
                     List<Treadmill> treadmillList = devicehelper.setTreadmillParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
@@ -808,9 +836,49 @@ namespace WindowsFormsApplication2
                         cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
                         cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
                     }
+                    txDeviceType = new Label();
+                    txDeviceType.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceType.Text = "设备名：";
+
+                    txDeviceTypeName = new Label();
+                    txDeviceTypeName.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceTypeName.Text = "跑步机";
+
+                    txSection = new Label();
+                    txSection.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSection.Size = new System.Drawing.Size(80, 30);
+                    txSection.Text = "段  号：";
+
+                    txSectionNumber = new Label();
+                    txSectionNumber.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSectionNumber.Size = new System.Drawing.Size(80, 30);
+                    txSectionNumber.Text = "1";
+
+                    txParameter1 = new Label();
+                    txParameter1.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 80);
+                    txParameter1.Size = new System.Drawing.Size(80, 30);
+                    txParameter1.Text = "时  间：";
+
+                    numberParameter1 = new NumericUpDown();
+                    numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 80);
+                    numberParameter1.Size = new System.Drawing.Size(80, 30);
+                    numberParameter1.Maximum = 3000;
+                    numberParameter1.Minimum = 0;
+                    numberParameter1.Value = treadmillList[0].getTime();
+
+                    this.Controls.Add(txDeviceType);
+                    this.Controls.Add(txDeviceTypeName);
+                    this.Controls.Add(txSection);
+                    this.Controls.Add(txSectionNumber);
+                    this.Controls.Add(txParameter1);
+                    this.Controls.Add(numberParameter1);
+
                     break;
 
                 case 3:
+                    deviceTypeDisplayNow = 3;
                     List<Elliptical> ellipticalList = devicehelper.setEllipticalParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
@@ -832,6 +900,7 @@ namespace WindowsFormsApplication2
                     }
                     break;
                 case 13:
+                    deviceTypeDisplayNow = 13;
                     List<uprightCycle> uprightCycleList = devicehelper.setuprightCycleParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
@@ -855,6 +924,7 @@ namespace WindowsFormsApplication2
                     break;
 
                 case 14:
+                    deviceTypeDisplayNow = 14;
                     List<recumbentCycle> recumbentCycleList = devicehelper.setrecumbentCycleParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
@@ -878,6 +948,7 @@ namespace WindowsFormsApplication2
                     break;
 
                 case 6:
+                    deviceTypeDisplayNow = 6;
                     List<ECP> ecpList = devicehelper.setecpParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {

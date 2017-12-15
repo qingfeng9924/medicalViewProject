@@ -49,6 +49,16 @@ namespace WindowsFormsApplication2
         {
             p.X = e.X;
             p.Y = e.Y;
+
+            cube = (sender as CubeControl);
+            txSectionNumber.Text = (cube.TabIndex + 1).ToString();
+
+            switch(deviceTypeDisplayNow)
+            {
+                case 1:
+                    numberParameter1.Value = (cube.Width / 5) * 60;
+                    break;
+            }
         }
 
         private void cubeMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
