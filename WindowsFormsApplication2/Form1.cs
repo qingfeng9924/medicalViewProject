@@ -56,7 +56,9 @@ namespace WindowsFormsApplication2
             switch(deviceTypeDisplayNow)
             {
                 case 1:
-                    numberParameter1.Value = (cube.Width / 5) * 60;
+                    numberParameter1.Value = treadmillList[cube.TabIndex].getTime();
+                    numberParameter2.Value = treadmillList[cube.TabIndex].getCurSpeed();
+                    numberParameter3.Value = treadmillList[cube.TabIndex].getSlope();
                     break;
             }
         }

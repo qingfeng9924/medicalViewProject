@@ -30,7 +30,14 @@ namespace WindowsFormsApplication2
         private Label txParameter4;
         private NumericUpDown numberParameter4;
 
+        private List<Treadmill> treadmillList;
+        private List<Elliptical> ellipticalList;
+        private List<uprightCycle> uprightCycleList;
+        private List<recumbentCycle> recumbentCycleList;
+        private List<ECP> ecpList;
+
         private int deviceTypeDisplayNow;
+
      //   private Panel DrawPan = new Panel();
 
 
@@ -817,7 +824,7 @@ namespace WindowsFormsApplication2
             {
                 case 1:
                     deviceTypeDisplayNow = 1;
-                    List<Treadmill> treadmillList = devicehelper.setTreadmillParameter(deviceList, planId);
+                    treadmillList = devicehelper.setTreadmillParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
                         newCube = new CubeControl(100, 100);
@@ -862,11 +869,35 @@ namespace WindowsFormsApplication2
                     txParameter1.Text = "时  间：";
 
                     numberParameter1 = new NumericUpDown();
-                    numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 80);
+                    numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 75);
                     numberParameter1.Size = new System.Drawing.Size(80, 30);
                     numberParameter1.Maximum = 3000;
                     numberParameter1.Minimum = 0;
                     numberParameter1.Value = treadmillList[0].getTime();
+
+                    txParameter2 = new Label();
+                    txParameter2.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 120);
+                    txParameter2.Size = new System.Drawing.Size(80, 30);
+                    txParameter2.Text = "速  度：";
+
+                    numberParameter2 = new NumericUpDown();
+                    numberParameter2.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 115);
+                    numberParameter2.Size = new System.Drawing.Size(80, 30);
+                    numberParameter2.Maximum = 2500;
+                    numberParameter2.Minimum = 0;
+                    numberParameter2.Value = treadmillList[0].getCurSpeed();
+
+                    txParameter3 = new Label();
+                    txParameter3.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 160);
+                    txParameter3.Size = new System.Drawing.Size(80, 30);
+                    txParameter3.Text = "坡  度：";
+
+                    numberParameter3 = new NumericUpDown();
+                    numberParameter3.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 155);
+                    numberParameter3.Size = new System.Drawing.Size(80, 30);
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = 0;
+                    numberParameter3.Value = treadmillList[0].getSlope();
 
                     this.Controls.Add(txDeviceType);
                     this.Controls.Add(txDeviceTypeName);
@@ -874,12 +905,16 @@ namespace WindowsFormsApplication2
                     this.Controls.Add(txSectionNumber);
                     this.Controls.Add(txParameter1);
                     this.Controls.Add(numberParameter1);
+                    this.Controls.Add(txParameter2);
+                    this.Controls.Add(numberParameter2);
+                    this.Controls.Add(txParameter3);
+                    this.Controls.Add(numberParameter3);
 
                     break;
 
                 case 3:
                     deviceTypeDisplayNow = 3;
-                    List<Elliptical> ellipticalList = devicehelper.setEllipticalParameter(deviceList, planId);
+                    ellipticalList = devicehelper.setEllipticalParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
                         newCube = new CubeControl(100, 100);
@@ -901,7 +936,7 @@ namespace WindowsFormsApplication2
                     break;
                 case 13:
                     deviceTypeDisplayNow = 13;
-                    List<uprightCycle> uprightCycleList = devicehelper.setuprightCycleParameter(deviceList, planId);
+                    uprightCycleList = devicehelper.setuprightCycleParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
                         newCube = new CubeControl(100, 100);
@@ -925,7 +960,7 @@ namespace WindowsFormsApplication2
 
                 case 14:
                     deviceTypeDisplayNow = 14;
-                    List<recumbentCycle> recumbentCycleList = devicehelper.setrecumbentCycleParameter(deviceList, planId);
+                    recumbentCycleList = devicehelper.setrecumbentCycleParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
                         newCube = new CubeControl(100, 100);
@@ -949,7 +984,7 @@ namespace WindowsFormsApplication2
 
                 case 6:
                     deviceTypeDisplayNow = 6;
-                    List<ECP> ecpList = devicehelper.setecpParameter(deviceList, planId);
+                    ecpList = devicehelper.setecpParameter(deviceList, planId);
                     for (int i = 0; i < cubeNum; i++)
                     {
                         newCube = new CubeControl(100, 100);
