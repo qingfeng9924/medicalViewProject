@@ -12,8 +12,8 @@ namespace WindowsFormsApplication2
         private int move = XYLinesFactory.getMove();
         private int cubeNum;
         private int Ybase;
-        public List<deviceInfo> deviceList;
-        private List<ExecuteOrder> orderList;
+        //private List<deviceInfo> deviceList;
+        //private List<ExecuteOrder> orderList;
         private deviceHelper devicehelper;
         private CubeHelper cubeHelper;
         private CubeControl newCube;
@@ -40,9 +40,9 @@ namespace WindowsFormsApplication2
 
      //   private Panel DrawPan = new Panel();
 
+        Label[] infLabel;
 
-
-
+        Label tempLabe1, tempLabel2, tempLabel3;
         /// <summary>
         /// 必需的设计器变量。
         /// //创建刷新县线程
@@ -50,6 +50,7 @@ namespace WindowsFormsApplication2
         /// </summary>
         int lpWidth = 100;
         int lpHeight = 100;
+        SecondCtrl sc0;
         SecondCtrl sc1;
         RightSecondControl rsc1,rsc2;
         SecondCtrl sc2;
@@ -167,6 +168,8 @@ namespace WindowsFormsApplication2
            // infoPanel.BackColor = helper.createColor(196,203,211);
             infoPanel.BackColor = Color.Gray;
 
+            //信息label
+            infLabel = new Label[14];
 
             topPanel = new Panel();
             topPanel.Size = new System.Drawing.Size(width, height/4);
@@ -238,24 +241,51 @@ namespace WindowsFormsApplication2
             boPanel.Location = new Point(0,10);
             boPanel.Size = new System.Drawing.Size(topPanel.Width/4 - 5, topPanel.Height);
 
+            boPanel.BorderStyle = BorderStyle.Fixed3D;
+
             boImageLabel = new Label();
             boImageLabel.Image = boImage;
             boImageLabel.Location = new Point(0, 0);
             boImageLabel.Size = new System.Drawing.Size(boPanel.Width,boPanel.Height/2-10);
 
 
+
+
             boOpPanel = new UserPanel();
+
+            boOpPanel.BackColor = Color.Red;
+
             boOpPanel.Location = new Point(0,boImageLabel.Height+27);
             boOpPanel.Size = new System.Drawing.Size(boPanel.Width,35);
-            boOpPanel.BackColor = Color.White;
+            boOpPanel.BackColor = Color.Red;
             boLabel = new Label();
-            boLabel.Size = new System.Drawing.Size(50,boOpPanel.Height);
-            boLabel.Location = new Point(50,0);
+            boLabel.Size = new System.Drawing.Size((int)((float)boOpPanel.Width / 60 * (monitorPara[1] - monitorPara[0])), boOpPanel.Height);
+            boLabel.Location = new Point((int)(((float)monitorPara[0]-60)/60*boOpPanel.Width), 0);
             boLabel.BackColor = helper.createColor(114, 149, 182);
-            new OperateControl(boLabel);
+            boLabel.MouseHover += new EventHandler(mouseHover);
+           // new OperateControl(boLabel);
            // boLabel.Text = "ssssssssssssssssssssssss";
             boOpPanel.Controls.Add(boLabel);
 
+            /*
+             * 
+             * */
+
+            infLabel[0] = new Label();
+            infLabel[0].Location = new Point(boLabel.Location.X-5,boOpPanel.Location.Y+boOpPanel.Height+2);
+            infLabel[0].Size = new Size(30,10);
+            infLabel[1] = new Label();
+            infLabel[1].Location = new Point(boLabel.Location.X+boLabel.Width, boOpPanel.Location.Y + boOpPanel.Height + 2);
+            infLabel[1].Size = new Size(30, 10);
+            /*
+             * 初始化血氧参数
+             * */
+            infLabel[0].Text = monitorPara[0].ToString();
+            infLabel[1].Text = monitorPara[1].ToString();
+ 
+            boPanel.Controls.Add(infLabel[0]);
+
+            boPanel.Controls.Add(infLabel[1]);
             boPanel.Controls.Add(boImageLabel);
             boPanel.Controls.Add(boOpPanel);
             //心率
@@ -263,6 +293,8 @@ namespace WindowsFormsApplication2
             hrPanel = new Panel();
             hrPanel.Location = new Point(boPanel.Width + boPanel.Location.X + 5, 10);
             hrPanel.Size = new System.Drawing.Size(topPanel.Width/4 - 5, topPanel.Height);
+
+            hrPanel.BorderStyle = BorderStyle.Fixed3D; ;
 
             hrImageLabel = new Label();
             hrImageLabel.Image = hrImage;
@@ -275,25 +307,57 @@ namespace WindowsFormsApplication2
             hrOpPanel.Size = new System.Drawing.Size(hrPanel.Width, 35);
             hrOpPanel.BackColor = Color.White;
             hrLabel[0] = new Label();
-            hrLabel[0].Size = new System.Drawing.Size(50, hrOpPanel.Height-4);
-            hrLabel[0].Location = new Point(50, 2);
+            hrLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[3] - monitorPara[2])/130*hrOpPanel.Width), hrOpPanel.Height - 4);
+            hrLabel[0].Location = new Point((int)((float)hrOpPanel.Width * (monitorPara[2]-30)/130), 2);
             hrLabel[0].BackColor = Color.Red;
            // hrLabel[0].MouseClick += new MouseEventHandler(mouseClick);
             hrLabel[1] = new Label();
-            hrLabel[1].Size = new System.Drawing.Size(50, hrOpPanel.Height-4);
+            hrLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[4] - monitorPara[3]) / 130 * hrOpPanel.Width), hrOpPanel.Height - 4);
             hrLabel[1].Location = new Point(hrLabel[0].Location.X+hrLabel[0].Width+2, 2);
             hrLabel[1].BackColor = helper.createColor(114, 149, 182);
            // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
 
 
             hrLabel[2] = new Label();
-            hrLabel[2].Size = new System.Drawing.Size(50, hrOpPanel.Height-4);
+            hrLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[5] - monitorPara[4]) / 130 * hrOpPanel.Width), hrOpPanel.Height - 4);
             hrLabel[2].Location = new Point(hrLabel[1].Location.X+hrLabel[1].Width+2, 2);
 
             hrLabel[2].BackColor = Color.Red;
             hrLabel[2].MouseEnter += new EventHandler(mouseHover);
             hrLabel[1].MouseEnter += new EventHandler(mouseHover);
             hrLabel[0].MouseEnter += new EventHandler(mouseHover);
+
+
+
+
+            //初始化心率
+            infLabel[2] = new Label();
+            infLabel[2].Size = new Size(30, 10);
+            infLabel[2].Location = new Point(hrLabel[0].Location.X-25,hrOpPanel.Location.Y+hrOpPanel.Height+2);
+            infLabel[2].Text = monitorPara[2]+"";
+
+            infLabel[3] = new Label();
+            infLabel[3].Size = new Size(30, 10);
+            infLabel[3].Location = new Point(hrLabel[1].Location.X - 25, hrOpPanel.Location.Y -15);
+            infLabel[3].Text = monitorPara[3] + "";
+            infLabel[4] = new Label();
+            infLabel[4].Size = new Size(30, 10);
+            infLabel[4].Location = new Point(hrLabel[2].Location.X - 5, hrOpPanel.Location.Y + hrOpPanel.Height + 2);
+            infLabel[4].Text = monitorPara[4] + "";
+            infLabel[5] = new Label();
+            infLabel[5].Size = new Size(30, 10);
+            infLabel[5].Location = new Point(hrLabel[2].Location.X + hrLabel[2].Width - 15, hrOpPanel.Location.Y - 15);
+            infLabel[5].Text =monitorPara[5]+"";
+
+            //infLabel[3].BackColor = Color.Transparent;
+            hrPanel.Controls.Add(infLabel[2]);
+            hrPanel.Controls.Add(infLabel[3]);
+            hrPanel.Controls.Add(infLabel[4]);
+            hrPanel.Controls.Add(infLabel[5]);
+
+
+
+
 
             // boLabel.Text = "ssssssssssssssssssssssss";
             hrOpPanel.Controls.Add(hrLabel[0]);
@@ -323,19 +387,20 @@ namespace WindowsFormsApplication2
             ssyOpPanel.Size = new System.Drawing.Size(ssyPanel.Width, 35);
             ssyOpPanel.BackColor = Color.White;
             ssyLabel[0] = new Label();
-            ssyLabel[0].Size = new System.Drawing.Size(50, ssyOpPanel.Height - 4);
-            ssyLabel[0].Location = new Point(50, 2);
+          //  Console.WriteLine("(float)(monitorPara[7] - monitorPara[6])" + (int)((float)(monitorPara[7] - monitorPara[6]) / 150 * ssyOpPanel.Width));
+            ssyLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[7] - monitorPara[6]) / 150 * ssyOpPanel.Width), ssyOpPanel.Height - 4);
+            ssyLabel[0].Location = new Point((int)(((float)(monitorPara[6]-30))/150*ssyOpPanel.Width), 2);
             ssyLabel[0].BackColor = Color.Red;
            // ssyLabel[0].MouseClick += new MouseEventHandler(mouseClick);
             ssyLabel[1] = new Label();
-            ssyLabel[1].Size = new System.Drawing.Size(50, ssyOpPanel.Height - 4);
+            ssyLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[8] - monitorPara[7])/150*ssyOpPanel.Width), ssyOpPanel.Height - 4);
             ssyLabel[1].Location = new Point(ssyLabel[0].Location.X + ssyLabel[0].Width + 2, 2);
             ssyLabel[1].BackColor = helper.createColor(114, 149, 182);
             // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
 
 
             ssyLabel[2] = new Label();
-            ssyLabel[2].Size = new System.Drawing.Size(50, ssyOpPanel.Height - 4);
+            ssyLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[9] - monitorPara[8]) / 150 * ssyOpPanel.Width), ssyOpPanel.Height - 4);
             ssyLabel[2].Location = new Point(ssyLabel[1].Location.X + ssyLabel[1].Width + 2, 2);
 
             ssyLabel[2].BackColor = Color.Red;
@@ -343,6 +408,33 @@ namespace WindowsFormsApplication2
             ssyLabel[1].MouseEnter += new EventHandler(mouseHover);
             ssyLabel[0].MouseEnter += new EventHandler(mouseHover);
 
+
+
+            //初始化收缩压
+            infLabel[6] = new Label();
+            infLabel[6].Location = new Point(ssyLabel[0].Location.X-25,ssyOpPanel.Height+ssyOpPanel.Location.Y+2);
+            infLabel[6].Size = new System.Drawing.Size(20,10);
+            infLabel[6].Text = monitorPara[6] + "";
+            infLabel[7] = new Label();
+            infLabel[7].Location = new Point(ssyLabel[1].Location.X - 25,ssyOpPanel.Location.Y -15);
+            infLabel[7].Size = new System.Drawing.Size(25, 10);
+            infLabel[7].Text = monitorPara[7] + "";
+            infLabel[8] = new Label();
+            infLabel[8].Location = new Point(ssyLabel[2].Location.X - 25, ssyOpPanel.Height + ssyOpPanel.Location.Y + 2);
+            infLabel[8].Size = new System.Drawing.Size(25, 10);
+            infLabel[8].Text = monitorPara[8] + "";
+
+            infLabel[9] = new Label();
+            infLabel[9].Location = new Point(ssyLabel[2].Location.X + ssyLabel[2].Width - 25, ssyOpPanel.Location.Y - 15);
+            infLabel[9].Size = new System.Drawing.Size(25, 10);
+            infLabel[9].Text = monitorPara[9] + "";
+
+
+
+            ssyPanel.Controls.Add(infLabel[6]);
+            ssyPanel.Controls.Add(infLabel[7]);
+            ssyPanel.Controls.Add(infLabel[8]);
+            ssyPanel.Controls.Add(infLabel[9]);
             // boLabel.Text = "ssssssssssssssssssssssss";
             ssyOpPanel.Controls.Add(ssyLabel[0]);
             ssyOpPanel.Controls.Add(ssyLabel[1]);
@@ -356,7 +448,7 @@ namespace WindowsFormsApplication2
             ///
             szyPanel = new Panel();
             szyPanel.Location = new Point(ssyPanel.Width + ssyPanel.Location.X + 5, 10);
-            szyPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 20, topPanel.Height);
+            szyPanel.Size = new System.Drawing.Size(topPanel.Width / 4-5, topPanel.Height);
 
             szyImageLabel = new Label();
             szyImageLabel.Image = szyImage;
@@ -369,25 +461,52 @@ namespace WindowsFormsApplication2
             szyOpPanel.Size = new System.Drawing.Size(szyPanel.Width, 35);
             szyOpPanel.BackColor = Color.White;
             szyLabel[0] = new Label();
-            szyLabel[0].Size = new System.Drawing.Size(50, szyOpPanel.Height - 4);
-            szyLabel[0].Location = new Point(50, 2);
+            szyLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[11]-monitorPara[10])/100*szyOpPanel.Width), szyOpPanel.Height - 4);
+            szyLabel[0].Location = new Point((int)((float)(monitorPara[10]-30)/100*szyOpPanel.Width), 2);
             szyLabel[0].BackColor = Color.Red;
             //szyLabel[0].MouseClick += new MouseEventHandler(mouseClick);
             szyLabel[1] = new Label();
-            szyLabel[1].Size = new System.Drawing.Size(50, szyOpPanel.Height - 4);
+            szyLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[12] - monitorPara[11]) / 100 * szyOpPanel.Width), szyOpPanel.Height - 4);
             szyLabel[1].Location = new Point(szyLabel[0].Location.X + szyLabel[0].Width + 2, 2);
             szyLabel[1].BackColor = helper.createColor(114, 149, 182);
             // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
 
 
             szyLabel[2] = new Label();
-            szyLabel[2].Size = new System.Drawing.Size(50, szyOpPanel.Height - 4);
+            szyLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[13] - monitorPara[12]) / 100 * szyOpPanel.Width), szyOpPanel.Height - 4);
             szyLabel[2].Location = new Point(szyLabel[1].Location.X + szyLabel[1].Width + 2, 2);
 
             szyLabel[2].BackColor = Color.Red;
             szyLabel[2].MouseEnter += new EventHandler(mouseHover);
             szyLabel[1].MouseEnter += new EventHandler(mouseHover);
             szyLabel[0].MouseEnter += new EventHandler(mouseHover);
+
+
+            //初始化收缩压
+            infLabel[10] = new Label();
+            infLabel[10].Location = new Point(szyLabel[0].Location.X - 5, szyOpPanel.Height + szyOpPanel.Location.Y + 2);
+            infLabel[10].Size = new System.Drawing.Size(20, 10);
+            infLabel[10].Text = monitorPara[10] + "";
+            infLabel[11] = new Label();
+            infLabel[11].Location = new Point(szyLabel[1].Location.X - 5, szyOpPanel.Location.Y - 15);
+            infLabel[11].Size = new System.Drawing.Size(25, 10);
+            infLabel[11].Text = monitorPara[11] + "";
+            infLabel[12] = new Label();
+            infLabel[12].Location = new Point(szyLabel[2].Location.X - 15, szyOpPanel.Height + szyOpPanel.Location.Y + 2);
+            infLabel[12].Size = new System.Drawing.Size(25, 10);
+            infLabel[12].Text = monitorPara[12] + "";
+
+            infLabel[13] = new Label();
+            infLabel[13].Location = new Point(szyLabel[2].Location.X + szyLabel[2].Width -25, szyOpPanel.Location.Y - 15);
+            infLabel[13].Size = new System.Drawing.Size(25, 10);
+            infLabel[13].Text = monitorPara[13] + "";
+
+
+            szyPanel.Controls.Add(infLabel[10]);
+            szyPanel.Controls.Add(infLabel[11]);
+            szyPanel.Controls.Add(infLabel[12]);
+            szyPanel.Controls.Add(infLabel[13]);
+            //
 
             // boLabel.Text = "ssssssssssssssssssssssss";
             szyOpPanel.Controls.Add(szyLabel[0]);
@@ -414,7 +533,8 @@ namespace WindowsFormsApplication2
            // this.Controls.Add(label_stByc);
 
 
-
+            //血氧等参数信息
+            
 
             
             /*
@@ -473,15 +593,15 @@ namespace WindowsFormsApplication2
              * 绘画
              * 
              **/
-            SQLHelper sqlHelper = new SQLHelper(307);
+            //sqlHelper = new SQLHelper(307);
             //监护参数
-            List<monitorInfo> monitorList = sqlHelper.sqlReadMonitor();
+            //List<monitorInfo> monitorList = sqlHelper.sqlReadMonitor();
             //运动方案
-            deviceList = sqlHelper.sqlReaderDevice();
+            //deviceList = sqlHelper.sqlReaderDevice();
             //执行顺序
-            orderList = new List<ExecuteOrder>();
-            orderList = sqlHelper.sqlReaderOrder();
-            int planId = orderList[0].EXERCISE_PLAN_ID;
+            //orderList = new List<ExecuteOrder>();
+            //orderList = sqlHelper.sqlReaderOrder();
+            //int planId = orderList[0].EXERCISE_PLAN_ID;
 
             for (int i = 0; i < monitorList.Count; i++) 
             {
@@ -871,7 +991,7 @@ namespace WindowsFormsApplication2
                     numberParameter1 = new NumericUpDown();
                     numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 75);
                     numberParameter1.Size = new System.Drawing.Size(80, 30);
-                    numberParameter1.Maximum = 3000;
+                    numberParameter1.Maximum = 30000;
                     numberParameter1.Minimum = 0;
                     numberParameter1.Value = treadmillList[0].getTime();
 

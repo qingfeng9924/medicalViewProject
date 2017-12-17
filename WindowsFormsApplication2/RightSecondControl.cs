@@ -22,7 +22,7 @@ namespace WindowsFormsApplication2
         Control secCtrl;
         private const int band = 1;
         Size temp = new Size(band, band);
-        private int minLength = 10;
+        private int minLength =2;
         private Point pPoint; //上个鼠标坐标
         private Point cPoint; //当前鼠标坐标
         private MousePosOnCtrl mpoc;
@@ -113,6 +113,7 @@ namespace WindowsFormsApplication2
         }
         private void ControlMove()
         {
+            
             cPoint = Cursor.Position;
             int x = cPoint.X - pPoint.X;
             int y = cPoint.Y - pPoint.Y;
