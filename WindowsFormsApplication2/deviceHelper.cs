@@ -260,5 +260,23 @@ namespace WindowsFormsApplication2
             }
             return ecpList;
         }
+
+        public void changeTreadmillParaInList(List<deviceInfo> deviceList, int planId, int secNum, int paraId, int value)
+        {
+            for (int i = 0; i < deviceList.Count; i++)
+            {
+                if (deviceList[i].EXERCISE_PLAN_ID.Equals(planId.ToString()))
+                {
+                    if (deviceList[i].SECTION_ORDER.Equals(secNum.ToString()))
+                    {
+                         if (deviceList[i].PARAMETER_ID.Equals(paraId.ToString()))
+                         {
+                             deviceList[i].VALUE_IN_SECTION = value.ToString();
+                         }
+                    }
+                }
+            }
+            //return deviceList;
+        }
     }
 }
