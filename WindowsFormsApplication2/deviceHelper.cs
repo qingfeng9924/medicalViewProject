@@ -261,7 +261,7 @@ namespace WindowsFormsApplication2
             return ecpList;
         }
 
-        public void changeTreadmillParaInList(List<deviceInfo> deviceList, int planId, int secNum, int paraId, int value)
+        public void changeParaInList(List<deviceInfo> deviceList, int planId, int secNum, int paraId, int value)
         {
             for (int i = 0; i < deviceList.Count; i++)
             {
@@ -277,6 +277,40 @@ namespace WindowsFormsApplication2
                 }
             }
             //return deviceList;
+        }
+
+        public void changeParaMaxValueInList(List<deviceInfo> deviceList, int planId, int secNum, int paraId, int value)
+        {
+            for (int i = 0; i < deviceList.Count; i++)
+            {
+                if (deviceList[i].EXERCISE_PLAN_ID.Equals(planId.ToString()))
+                {
+                    if (deviceList[i].SECTION_ORDER.Equals(secNum.ToString()))
+                    {
+                        if (deviceList[i].PARAMETER_ID.Equals(paraId.ToString()))
+                        {
+                            deviceList[i].MAX_VALUE = value.ToString();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void changeParaMinValueInList(List<deviceInfo> deviceList, int planId, int secNum, int paraId, int value)
+        {
+            for (int i = 0; i < deviceList.Count; i++)
+            {
+                if (deviceList[i].EXERCISE_PLAN_ID.Equals(planId.ToString()))
+                {
+                    if (deviceList[i].SECTION_ORDER.Equals(secNum.ToString()))
+                    {
+                        if (deviceList[i].PARAMETER_ID.Equals(paraId.ToString()))
+                        {
+                            deviceList[i].MIN_VALUE = value.ToString();
+                        }
+                    }
+                }
+            }
         }
     }
 }

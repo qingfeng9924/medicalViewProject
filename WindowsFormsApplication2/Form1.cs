@@ -32,7 +32,8 @@ namespace WindowsFormsApplication2
 
         public void setData()
         {
-            sqlHelper = new SQLHelper(307);
+            //sqlHelper = new SQLHelper(307);
+            sqlHelper = new SQLHelper(319);
             monitorList = sqlHelper.sqlReadMonitor();
             deviceList = sqlHelper.sqlReaderDevice();
             orderList = new List<ExecuteOrder>();
@@ -51,10 +52,10 @@ namespace WindowsFormsApplication2
                 }
                 else if(monitorList[i].MONITOE_PARA_ID.Equals("2"))
                 {
-                    monitorPara[2] = int.Parse(monitorList[i].PARA_DOWN_LIMIT);
-                    monitorPara[3] = int.Parse(monitorList[i].PARA_DOWN_ALERT);
-                    monitorPara[4] = int.Parse(monitorList[i].PARA_UP_ALERT);
-                    monitorPara[5] = int.Parse(monitorList[i].PARA_UP_LIMIT);
+                    monitorPara[10] = int.Parse(monitorList[i].PARA_DOWN_LIMIT);
+                    monitorPara[11] = int.Parse(monitorList[i].PARA_DOWN_ALERT);
+                    monitorPara[12] = int.Parse(monitorList[i].PARA_UP_ALERT);
+                    monitorPara[13] = int.Parse(monitorList[i].PARA_UP_LIMIT);
                 }
                 else if (monitorList[i].MONITOE_PARA_ID.Equals("3"))
                 {
@@ -65,10 +66,10 @@ namespace WindowsFormsApplication2
                 }
                 else if (monitorList[i].MONITOE_PARA_ID.Equals("4"))
                 {
-                    monitorPara[10] = int.Parse(monitorList[i].PARA_DOWN_LIMIT);
-                    monitorPara[11] = int.Parse(monitorList[i].PARA_DOWN_ALERT);
-                    monitorPara[12] = int.Parse(monitorList[i].PARA_UP_ALERT);
-                    monitorPara[13] = int.Parse(monitorList[i].PARA_UP_LIMIT);
+                    monitorPara[2] = int.Parse(monitorList[i].PARA_DOWN_LIMIT);
+                    monitorPara[3] = int.Parse(monitorList[i].PARA_DOWN_ALERT);
+                    monitorPara[4] = int.Parse(monitorList[i].PARA_UP_ALERT);
+                    monitorPara[5] = int.Parse(monitorList[i].PARA_UP_LIMIT);
                 }
             }
         }
@@ -105,13 +106,55 @@ namespace WindowsFormsApplication2
                     treadmillList[operatedSec - 1].setTime((int)numberParameter1.Value);
                     cubeList[operatedSec - 1].Width = ((int)numberParameter1.Value / 60) * 5;
 
-                    devicehelper.changeTreadmillParaInList(deviceList, planId, operatedSec, 1, (int)numberParameter1.Value);
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 1, (int)numberParameter1.Value);
 
                     for (int i = operatedSec; i < cubeList.Count; i++) 
                     {
                         cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
                     }
 
+                    runMachPanel.Refresh();
+
+                    break;
+
+                case 3:
+                    ellipticalList[operatedSec - 1].setDistance((int)numberParameter1.Value);
+                    cubeList[operatedSec - 1].Width = (int)numberParameter1.Value / 2;
+
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 14, (int)numberParameter1.Value);
+
+                    for (int i = operatedSec; i < cubeList.Count; i++)
+                    {
+                        cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
+                    }
+                    runMachPanel.Refresh();
+
+                    break;
+
+                case 13:
+                    uprightCycleList[operatedSec - 1].setDistance((int)numberParameter1.Value);
+                    cubeList[operatedSec - 1].Width = (int)numberParameter1.Value / 2;
+
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 28, (int)numberParameter1.Value);
+
+                    for (int i = operatedSec; i < cubeList.Count; i++)
+                    {
+                        cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
+                    }
+                    runMachPanel.Refresh();
+
+                    break;
+
+                case 14:
+                    recumbentCycleList[operatedSec - 1].setDistance((int)numberParameter1.Value);
+                    cubeList[operatedSec - 1].Width = (int)numberParameter1.Value / 2;
+
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 7, (int)numberParameter1.Value);
+
+                    for (int i = operatedSec; i < cubeList.Count; i++)
+                    {
+                        cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
+                    }
                     runMachPanel.Refresh();
 
                     break;
@@ -128,7 +171,37 @@ namespace WindowsFormsApplication2
                     numberParameter4.Maximum = (int)numberParameter2.Value;
                     cubeList[operatedSec - 1].Height = 100 + (((int)numberParameter2.Value) / 100) * ((345 - 100) / (25 - 1));
                     cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
-                    devicehelper.changeTreadmillParaInList(deviceList, planId, operatedSec, 4, (int)numberParameter2.Value);
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 4, (int)numberParameter2.Value);
+                    runMachPanel.Refresh();
+                    break;
+
+                case 3:
+                    ellipticalList[operatedSec - 1].setResistance((int)numberParameter2.Value);
+                    numberParameter3.Minimum = (int)numberParameter2.Value;
+                    numberParameter4.Maximum = (int)numberParameter2.Value;
+                    cubeList[operatedSec - 1].Height = 100 + ((int)numberParameter2.Value) * (345 - 100) / (15 - 1);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 17, (int)numberParameter2.Value);
+                    runMachPanel.Refresh();
+                    break;
+
+                case 13:
+                    uprightCycleList[operatedSec - 1].setResistance((int)numberParameter2.Value);
+                    numberParameter3.Minimum = (int)numberParameter2.Value;
+                    numberParameter4.Maximum = (int)numberParameter2.Value;
+                    cubeList[operatedSec - 1].Height = 100 + ((int)numberParameter2.Value) * (345 - 100) / (16 - 1);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 31, (int)numberParameter2.Value);
+                    runMachPanel.Refresh();
+                    break;
+
+                case 14:
+                    recumbentCycleList[operatedSec - 1].setResistance((int)numberParameter2.Value);
+                    numberParameter3.Minimum = (int)numberParameter2.Value;
+                    numberParameter4.Maximum = (int)numberParameter2.Value;
+                    cubeList[operatedSec - 1].Height = 100 + ((int)numberParameter2.Value) * (345 - 100) / (15 - 1);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 10, (int)numberParameter2.Value);
                     runMachPanel.Refresh();
                     break;
             }
@@ -142,11 +215,38 @@ namespace WindowsFormsApplication2
                     treadmillList[operatedSec - 1].setUpperSpeed((int)numberParameter3.Value);
                     numberParameter2.Maximum = (int)numberParameter3.Value;
                     cubeList[operatedSec - 1].MaxHeight = 100 + (((int)numberParameter3.Value) / 100) * ((345 - 100) / (25 - 1));
-                    //cubeList[operatedSec - 1].Height = 100 + (((int)numberParameter2.Value) / 100) * ((345 - 100) / (25 - 1));
                     cubeList[operatedSec - 1].MaximumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MaxWidth, cubeList[operatedSec - 1].MaxHeight);
                     cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
-                
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 4, (int)numberParameter3.Value);
                     break;
+
+                case 3:
+                    ellipticalList[operatedSec - 1].setUpperResistance((int)numberParameter3.Value);
+                    numberParameter2.Maximum = (int)numberParameter3.Value;
+                    cubeList[operatedSec - 1].MaxHeight = 100 + ((int)numberParameter3.Value) * (345 - 100) / (15 - 1);
+                    cubeList[operatedSec - 1].MaximumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MaxWidth, cubeList[operatedSec - 1].MaxHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 17, (int)numberParameter3.Value);
+                    break;
+
+                case 13:
+                    uprightCycleList[operatedSec - 1].setUpperResistance((int)numberParameter3.Value);
+                    numberParameter2.Maximum = (int)numberParameter3.Value;
+                    cubeList[operatedSec - 1].MaxHeight = 100 + ((int)numberParameter3.Value) * (345 - 100) / (16 - 1);
+                    cubeList[operatedSec - 1].MaximumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MaxWidth, cubeList[operatedSec - 1].MaxHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 31, (int)numberParameter3.Value);
+                    break;
+
+                case 14:
+                    recumbentCycleList[operatedSec - 1].setUpperResistance((int)numberParameter3.Value);
+                    numberParameter2.Maximum = (int)numberParameter3.Value;
+                    cubeList[operatedSec - 1].MaxHeight = 100 + ((int)numberParameter3.Value) * (345 - 100) / (15 - 1);
+                    cubeList[operatedSec - 1].MaximumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MaxWidth, cubeList[operatedSec - 1].MaxHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 10, (int)numberParameter3.Value);
+                    break;
+
             }
         }
 
@@ -158,18 +258,82 @@ namespace WindowsFormsApplication2
                     treadmillList[operatedSec - 1].setLowerSpeed((int)numberParameter4.Value);
                     numberParameter2.Minimum = (int)numberParameter4.Value;
                     cubeList[operatedSec - 1].MinHeight = 100 + (((int)numberParameter4.Value) / 100) * ((345 - 100) / (25 - 1));
-                    //cubeList[operatedSec - 1].Height = 100 + (((int)numberParameter2.Value) / 100) * ((345 - 100) / (25 - 1));
                     cubeList[operatedSec - 1].MinimumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MinWidth, cubeList[operatedSec - 1].MinHeight);
                     cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 4, (int)numberParameter4.Value);
+                    break;
 
+                case 3:
+                    ellipticalList[operatedSec - 1].setLowerResistance((int)numberParameter4.Value);
+                    numberParameter2.Minimum = (int)numberParameter4.Value;
+                    cubeList[operatedSec - 1].MinHeight = 100 + ((int)numberParameter4.Value) * (345 - 100) / (15 - 1);
+                    cubeList[operatedSec - 1].MinimumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MinWidth, cubeList[operatedSec - 1].MinHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 17, (int)numberParameter4.Value);
+                    break;
+
+                case 13:
+                    uprightCycleList[operatedSec - 1].setLowerResistance((int)numberParameter4.Value);
+                    numberParameter2.Minimum = (int)numberParameter4.Value;
+                    cubeList[operatedSec - 1].MinHeight = 100 + ((int)numberParameter4.Value) * (345 - 100) / (16 - 1);
+                    cubeList[operatedSec - 1].MinimumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MinWidth, cubeList[operatedSec - 1].MinHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 31, (int)numberParameter4.Value);
+                    break;
+
+                case 14:
+                    recumbentCycleList[operatedSec - 1].setLowerResistance((int)numberParameter4.Value);
+                    numberParameter2.Minimum = (int)numberParameter4.Value;
+                    cubeList[operatedSec - 1].MinHeight = 100 + ((int)numberParameter4.Value) * (345 - 100) / (15 - 1);
+                    cubeList[operatedSec - 1].MinimumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MinWidth, cubeList[operatedSec - 1].MinHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 10, (int)numberParameter4.Value);
                     break;
             }
         }
 
         private void numberParameter5_ValueChanged(object sender, EventArgs e)
         {
+            switch(deviceTypeDisplayNow)
+            {
+                case 1:
+                    treadmillList[operatedSec - 1].setSlope((int)numberParameter5.Value);
+                    numberParameter6.Minimum = (int)numberParameter5.Value;
+                    numberParameter7.Maximum = (int)numberParameter5.Value;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 5, (int)numberParameter5.Value);
+
+                    break;
+            }
+        }
+
+        private void numberParameter6_ValueChanged(object sender, EventArgs e)
+        {
+            switch(deviceTypeDisplayNow)
+            {
+                case 1:
+                    treadmillList[operatedSec - 1].setUpperSlope((int)numberParameter6.Value);
+                    numberParameter5.Maximum = (int)numberParameter6.Value;                  
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 5, (int)numberParameter6.Value);
+
+                    break;
+            }
+        }
+
+        private void numberParameter7_ValueChanged(object sender, EventArgs e)
+        {
+            switch(deviceTypeDisplayNow)
+            {
+                case 1:
+                    treadmillList[operatedSec - 1].setLowerSlope((int)numberParameter7.Value);
+                    numberParameter5.Minimum = (int)numberParameter7.Value;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 5, (int)numberParameter7.Value);
+
+                    break;
+            }
 
         }
+
+
 
         private void cubeMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -190,8 +354,8 @@ namespace WindowsFormsApplication2
                     numberParameter3.Maximum = 2500;
                     numberParameter3.Minimum = 0;
                     numberParameter4.Maximum = 2500;
-
                     numberParameter4.Minimum = 0;
+
                     numberParameter5.Maximum = 10;
                     numberParameter5.Minimum = 0;
                     numberParameter6.Maximum = 10;
@@ -218,6 +382,72 @@ namespace WindowsFormsApplication2
                     numberParameter6.Minimum = treadmillList[cube.TabIndex].getSlope();
                     numberParameter7.Maximum = treadmillList[cube.TabIndex].getSlope();
                     numberParameter7.Minimum = 0;
+
+                    break;
+
+                case 3:
+                    numberParameter1.Value = ellipticalList[cube.TabIndex].getDistance();
+
+                    numberParameter2.Maximum = 15;
+                    numberParameter2.Minimum = 1;
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = 1;
+                    numberParameter4.Maximum = 15;
+                    numberParameter4.Minimum = 1;
+
+                    numberParameter2.Value = ellipticalList[cube.TabIndex].getResistance();
+                    numberParameter3.Value = ellipticalList[cube.TabIndex].getUpperResistance();
+                    numberParameter4.Value = ellipticalList[cube.TabIndex].getLowerResistance();
+                    numberParameter2.Maximum = ellipticalList[cube.TabIndex].getUpperResistance();
+                    numberParameter2.Minimum = ellipticalList[cube.TabIndex].getLowerResistance();
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = ellipticalList[cube.TabIndex].getResistance();
+                    numberParameter4.Maximum = ellipticalList[cube.TabIndex].getResistance();
+                    numberParameter4.Minimum = 1;
+
+                    break;
+
+                case 13:
+                    numberParameter1.Value = uprightCycleList[cube.TabIndex].getDistance();
+
+                    numberParameter2.Maximum = 16;
+                    numberParameter2.Minimum = 1;
+                    numberParameter3.Maximum = 16;
+                    numberParameter3.Minimum = 1;
+                    numberParameter4.Maximum = 16;
+                    numberParameter4.Minimum = 1;
+
+                    numberParameter2.Value = uprightCycleList[cube.TabIndex].getResistance();
+                    numberParameter3.Value = uprightCycleList[cube.TabIndex].getUpperResistance();
+                    numberParameter4.Value = uprightCycleList[cube.TabIndex].getLowerResistance();
+                    numberParameter2.Maximum = uprightCycleList[cube.TabIndex].getUpperResistance();
+                    numberParameter2.Minimum = uprightCycleList[cube.TabIndex].getLowerResistance();
+                    numberParameter3.Maximum = 16;
+                    numberParameter3.Minimum = uprightCycleList[cube.TabIndex].getResistance();
+                    numberParameter4.Maximum = uprightCycleList[cube.TabIndex].getResistance();
+                    numberParameter4.Minimum = 1;
+
+                    break;
+
+                case 14:
+                    numberParameter1.Value = recumbentCycleList[cube.TabIndex].getDistance();
+
+                    numberParameter2.Maximum = 15;
+                    numberParameter2.Minimum = 1;
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = 1;
+                    numberParameter4.Maximum = 15;
+                    numberParameter4.Minimum = 1;
+
+                    numberParameter2.Value = recumbentCycleList[cube.TabIndex].getResistance();
+                    numberParameter3.Value = recumbentCycleList[cube.TabIndex].getUpperResistance();
+                    numberParameter4.Value = recumbentCycleList[cube.TabIndex].getLowerResistance();
+                    numberParameter2.Maximum = recumbentCycleList[cube.TabIndex].getUpperResistance();
+                    numberParameter2.Minimum = recumbentCycleList[cube.TabIndex].getLowerResistance();
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = recumbentCycleList[cube.TabIndex].getResistance();
+                    numberParameter4.Maximum = recumbentCycleList[cube.TabIndex].getResistance();
+                    numberParameter4.Minimum = 1;
 
                     break;
             }

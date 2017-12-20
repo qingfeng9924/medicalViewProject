@@ -35,6 +35,12 @@ namespace WindowsFormsApplication2
         private NumericUpDown numberParameter6;
         private Label txParameter7;
         private NumericUpDown numberParameter7;
+        private Label txParameter8;
+        private NumericUpDown numberParameter8;
+        private Label txParameter9;
+        private NumericUpDown numberParameter9;
+        private Label txParameter10;
+        private NumericUpDown numberParameter10;
 
         private List<Treadmill> treadmillList;
         private List<Elliptical> ellipticalList;
@@ -937,6 +943,9 @@ namespace WindowsFormsApplication2
             this.Controls.Remove(txParameter5);
             this.Controls.Remove(txParameter6);
             this.Controls.Remove(txParameter7);
+            this.Controls.Remove(txParameter8);
+            this.Controls.Remove(txParameter9);
+            this.Controls.Remove(txParameter10);
             this.Controls.Remove(numberParameter1);
             this.Controls.Remove(numberParameter2);
             this.Controls.Remove(numberParameter3);
@@ -944,6 +953,9 @@ namespace WindowsFormsApplication2
             this.Controls.Remove(numberParameter5);
             this.Controls.Remove(numberParameter6);
             this.Controls.Remove(numberParameter7);
+            this.Controls.Remove(numberParameter8);
+            this.Controls.Remove(numberParameter9);
+            this.Controls.Remove(numberParameter10);
 
             runMachPanel.Controls.Clear();
             int index = ((Label)sender).TabIndex;
@@ -1109,6 +1121,9 @@ namespace WindowsFormsApplication2
                     numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
                     numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
                     numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+                    numberParameter5.ValueChanged += new System.EventHandler(this.numberParameter5_ValueChanged);
+                    numberParameter6.ValueChanged += new System.EventHandler(this.numberParameter6_ValueChanged);
+                    numberParameter7.ValueChanged += new System.EventHandler(this.numberParameter7_ValueChanged);
 
                     break;
 
@@ -1133,7 +1148,97 @@ namespace WindowsFormsApplication2
                         cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
                         cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
                     }
+
+                    operatedSec = 1;
+
+                    txDeviceType = new Label();
+                    txDeviceType.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceType.Text = "设备名：";
+
+                    txDeviceTypeName = new Label();
+                    txDeviceTypeName.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceTypeName.Text = "椭圆机";
+
+                    txSection = new Label();
+                    txSection.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSection.Size = new System.Drawing.Size(80, 30);
+                    txSection.Text = "段  号：";
+
+                    txSectionNumber = new Label();
+                    txSectionNumber.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSectionNumber.Size = new System.Drawing.Size(80, 30);
+                    txSectionNumber.Text = "1";
+
+                    txParameter1 = new Label();
+                    txParameter1.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 80);
+                    txParameter1.Size = new System.Drawing.Size(80, 30);
+                    txParameter1.Text = "距  离：";
+
+                    numberParameter1 = new NumericUpDown();
+                    numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 75);
+                    numberParameter1.Size = new System.Drawing.Size(80, 30);
+                    numberParameter1.Maximum = 30000;
+                    numberParameter1.Minimum = 0;
+                    numberParameter1.Value = ellipticalList[0].getDistance();
+
+                    txParameter2 = new Label();
+                    txParameter2.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 120);
+                    txParameter2.Size = new System.Drawing.Size(80, 30);
+                    txParameter2.Text = "阻  力：";
+
+                    numberParameter2 = new NumericUpDown();
+                    numberParameter2.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 115);
+                    numberParameter2.Size = new System.Drawing.Size(80, 30);
+                    numberParameter2.Maximum = ellipticalList[0].getUpperResistance();
+                    numberParameter2.Minimum = ellipticalList[0].getLowerResistance();
+                    numberParameter2.Value = ellipticalList[0].getResistance();
+
+                    txParameter3 = new Label();
+                    txParameter3.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 160);
+                    txParameter3.Size = new System.Drawing.Size(80, 30);
+                    txParameter3.Text = "阻力上限：";
+
+                    numberParameter3 = new NumericUpDown();
+                    numberParameter3.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 155);
+                    numberParameter3.Size = new System.Drawing.Size(80, 30);
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = ellipticalList[0].getResistance();
+                    numberParameter3.Value = ellipticalList[0].getUpperResistance();
+
+                    txParameter4 = new Label();
+                    txParameter4.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 200);
+                    txParameter4.Size = new System.Drawing.Size(80, 30);
+                    txParameter4.Text = "阻力下限：";
+
+                    numberParameter4 = new NumericUpDown();
+                    numberParameter4.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 195);
+                    numberParameter4.Size = new System.Drawing.Size(80, 30);
+                    numberParameter4.Maximum = ellipticalList[0].getResistance();
+                    numberParameter4.Minimum = 1;
+                    numberParameter4.Value = ellipticalList[0].getLowerResistance();
+
+                    this.Controls.Add(txDeviceType);
+                    this.Controls.Add(txDeviceTypeName);
+                    this.Controls.Add(txSection);
+                    this.Controls.Add(txSectionNumber);
+                    this.Controls.Add(txParameter1);
+                    this.Controls.Add(numberParameter1);
+                    this.Controls.Add(txParameter2);
+                    this.Controls.Add(numberParameter2);
+                    this.Controls.Add(txParameter3);
+                    this.Controls.Add(numberParameter3);
+                    this.Controls.Add(txParameter4);
+                    this.Controls.Add(numberParameter4);
+
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     break;
+
                 case 13:
                     deviceTypeDisplayNow = 13;
                     uprightCycleList = devicehelper.setuprightCycleParameter(deviceList, planId);
@@ -1155,6 +1260,94 @@ namespace WindowsFormsApplication2
                         cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
                         cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
                     }
+
+                    operatedSec = 1;
+
+                    txDeviceType = new Label();
+                    txDeviceType.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceType.Text = "设备名：";
+
+                    txDeviceTypeName = new Label();
+                    txDeviceTypeName.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceTypeName.Text = "立式健身车";
+
+                    txSection = new Label();
+                    txSection.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSection.Size = new System.Drawing.Size(80, 30);
+                    txSection.Text = "段  号：";
+
+                    txSectionNumber = new Label();
+                    txSectionNumber.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSectionNumber.Size = new System.Drawing.Size(80, 30);
+                    txSectionNumber.Text = "1";
+
+                    txParameter1 = new Label();
+                    txParameter1.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 80);
+                    txParameter1.Size = new System.Drawing.Size(80, 30);
+                    txParameter1.Text = "距  离：";
+
+                    numberParameter1 = new NumericUpDown();
+                    numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 75);
+                    numberParameter1.Size = new System.Drawing.Size(80, 30);
+                    numberParameter1.Maximum = 30000;
+                    numberParameter1.Minimum = 0;
+                    numberParameter1.Value = uprightCycleList[0].getDistance();
+
+                    txParameter2 = new Label();
+                    txParameter2.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 120);
+                    txParameter2.Size = new System.Drawing.Size(80, 30);
+                    txParameter2.Text = "阻  力：";
+
+                    numberParameter2 = new NumericUpDown();
+                    numberParameter2.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 115);
+                    numberParameter2.Size = new System.Drawing.Size(80, 30);
+                    numberParameter2.Maximum = uprightCycleList[0].getUpperResistance();
+                    numberParameter2.Minimum = uprightCycleList[0].getLowerResistance();
+                    numberParameter2.Value = uprightCycleList[0].getResistance();
+
+                    txParameter3 = new Label();
+                    txParameter3.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 160);
+                    txParameter3.Size = new System.Drawing.Size(80, 30);
+                    txParameter3.Text = "阻力上限：";
+
+                    numberParameter3 = new NumericUpDown();
+                    numberParameter3.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 155);
+                    numberParameter3.Size = new System.Drawing.Size(80, 30);
+                    numberParameter3.Maximum = 16;
+                    numberParameter3.Minimum = uprightCycleList[0].getResistance();
+                    numberParameter3.Value = uprightCycleList[0].getUpperResistance();
+
+                    txParameter4 = new Label();
+                    txParameter4.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 200);
+                    txParameter4.Size = new System.Drawing.Size(80, 30);
+                    txParameter4.Text = "阻力下限：";
+
+                    numberParameter4 = new NumericUpDown();
+                    numberParameter4.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 195);
+                    numberParameter4.Size = new System.Drawing.Size(80, 30);
+                    numberParameter4.Maximum = uprightCycleList[0].getResistance();
+                    numberParameter4.Minimum = 1;
+                    numberParameter4.Value = uprightCycleList[0].getLowerResistance();
+
+                    this.Controls.Add(txDeviceType);
+                    this.Controls.Add(txDeviceTypeName);
+                    this.Controls.Add(txSection);
+                    this.Controls.Add(txSectionNumber);
+                    this.Controls.Add(txParameter1);
+                    this.Controls.Add(numberParameter1);
+                    this.Controls.Add(txParameter2);
+                    this.Controls.Add(numberParameter2);
+                    this.Controls.Add(txParameter3);
+                    this.Controls.Add(numberParameter3);
+                    this.Controls.Add(txParameter4);
+                    this.Controls.Add(numberParameter4);
+
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
 
                     break;
 
@@ -1180,6 +1373,94 @@ namespace WindowsFormsApplication2
                         cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
                     }
 
+                    operatedSec = 1;
+
+                    txDeviceType = new Label();
+                    txDeviceType.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceType.Text = "设备名：";
+
+                    txDeviceTypeName = new Label();
+                    txDeviceTypeName.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height);
+                    txDeviceType.Size = new System.Drawing.Size(80, 30);
+                    txDeviceTypeName.Text = "卧式健身车";
+
+                    txSection = new Label();
+                    txSection.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSection.Size = new System.Drawing.Size(80, 30);
+                    txSection.Text = "段  号：";
+
+                    txSectionNumber = new Label();
+                    txSectionNumber.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 40);
+                    txSectionNumber.Size = new System.Drawing.Size(80, 30);
+                    txSectionNumber.Text = "1";
+
+                    txParameter1 = new Label();
+                    txParameter1.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 80);
+                    txParameter1.Size = new System.Drawing.Size(80, 30);
+                    txParameter1.Text = "距  离：";
+
+                    numberParameter1 = new NumericUpDown();
+                    numberParameter1.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 75);
+                    numberParameter1.Size = new System.Drawing.Size(80, 30);
+                    numberParameter1.Maximum = 30000;
+                    numberParameter1.Minimum = 0;
+                    numberParameter1.Value = recumbentCycleList[0].getDistance();
+
+                    txParameter2 = new Label();
+                    txParameter2.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 120);
+                    txParameter2.Size = new System.Drawing.Size(80, 30);
+                    txParameter2.Text = "阻  力：";
+
+                    numberParameter2 = new NumericUpDown();
+                    numberParameter2.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 115);
+                    numberParameter2.Size = new System.Drawing.Size(80, 30);
+                    numberParameter2.Maximum = recumbentCycleList[0].getUpperResistance();
+                    numberParameter2.Minimum = recumbentCycleList[0].getLowerResistance();
+                    numberParameter2.Value = recumbentCycleList[0].getResistance();
+
+                    txParameter3 = new Label();
+                    txParameter3.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 160);
+                    txParameter3.Size = new System.Drawing.Size(80, 30);
+                    txParameter3.Text = "阻力上限：";
+
+                    numberParameter3 = new NumericUpDown();
+                    numberParameter3.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 155);
+                    numberParameter3.Size = new System.Drawing.Size(80, 30);
+                    numberParameter3.Maximum = 15;
+                    numberParameter3.Minimum = recumbentCycleList[0].getResistance();
+                    numberParameter3.Value = recumbentCycleList[0].getUpperResistance();
+
+                    txParameter4 = new Label();
+                    txParameter4.Location = new Point(width - 280, labelPanel.Location.Y + labelPanel.Height + 200);
+                    txParameter4.Size = new System.Drawing.Size(80, 30);
+                    txParameter4.Text = "阻力下限：";
+
+                    numberParameter4 = new NumericUpDown();
+                    numberParameter4.Location = new Point(width - 200, labelPanel.Location.Y + labelPanel.Height + 195);
+                    numberParameter4.Size = new System.Drawing.Size(80, 30);
+                    numberParameter4.Maximum = recumbentCycleList[0].getResistance();
+                    numberParameter4.Minimum = 1;
+                    numberParameter4.Value = recumbentCycleList[0].getLowerResistance();
+
+                    this.Controls.Add(txDeviceType);
+                    this.Controls.Add(txDeviceTypeName);
+                    this.Controls.Add(txSection);
+                    this.Controls.Add(txSectionNumber);
+                    this.Controls.Add(txParameter1);
+                    this.Controls.Add(numberParameter1);
+                    this.Controls.Add(txParameter2);
+                    this.Controls.Add(numberParameter2);
+                    this.Controls.Add(txParameter3);
+                    this.Controls.Add(numberParameter3);
+                    this.Controls.Add(txParameter4);
+                    this.Controls.Add(numberParameter4);
+
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     break;
 
                 case 6:
@@ -1203,6 +1484,8 @@ namespace WindowsFormsApplication2
                         cubeList[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.cubeMouseDown);
                         cubeList[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.cubeMouseMove);
                     }
+
+                    operatedSec = 1;
 
                     break;
             }

@@ -61,9 +61,9 @@ public class CubeControl : UserControl
     public void setUprightCycleWidthHeight(int distance,int resistance,int upperResistance,int lowerResistance)
     {
         this.Width = distance / 2;
-        this.Height = 100 + resistance * (345 - 100) / (15 - 1);
-        this.MaxHeight = 100 + upperResistance * (345 - 100) / (15 - 1);
-        this.MinHeight = 100 + lowerResistance * (345 - 100) / (15 - 1);
+        this.Height = 100 + resistance * (345 - 100) / (16 - 1);
+        this.MaxHeight = 100 + upperResistance * (345 - 100) / (16 - 1);
+        this.MinHeight = 100 + lowerResistance * (345 - 100) / (16 - 1);
         this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
         this.MaximumSize = new System.Drawing.Size(MaxWidth, MaxHeight);
         this.Top = this.getBase() - this.Height;
