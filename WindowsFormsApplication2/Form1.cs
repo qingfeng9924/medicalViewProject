@@ -32,8 +32,8 @@ namespace WindowsFormsApplication2
 
         public void setData()
         {
-            //sqlHelper = new SQLHelper(307);
-            sqlHelper = new SQLHelper(319);
+            sqlHelper = new SQLHelper(307);
+            //sqlHelper = new SQLHelper(319);
             monitorList = sqlHelper.sqlReadMonitor();
             deviceList = sqlHelper.sqlReaderDevice();
             orderList = new List<ExecuteOrder>();
@@ -98,6 +98,11 @@ namespace WindowsFormsApplication2
 
         }
         */
+        private void numberParameter_ValueChanged_null(object sender, EventArgs e)
+        {
+
+        }
+
         private void numberParameter1_ValueChanged(object sender, EventArgs e)
         {
             switch(deviceTypeDisplayNow)
@@ -158,6 +163,22 @@ namespace WindowsFormsApplication2
                     runMachPanel.Refresh();
 
                     break;
+
+
+                case 6:
+                    ecpList[operatedSec - 1].setTime((int)numberParameter1.Value);
+                    cubeList[operatedSec - 1].Width = ((int)numberParameter1.Value / 60) * 10;
+
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 20, (int)numberParameter1.Value);
+
+                    for (int i = operatedSec; i < cubeList.Count; i++)
+                    {
+                        cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
+                    }
+                    runMachPanel.Refresh();
+
+
+                    break;
             }
         }
 
@@ -204,6 +225,17 @@ namespace WindowsFormsApplication2
                     devicehelper.changeParaInList(deviceList, planId, operatedSec, 10, (int)numberParameter2.Value);
                     runMachPanel.Refresh();
                     break;
+
+                case 6:
+                    ecpList[operatedSec - 1].setExPressure((int)numberParameter2.Value);
+                    numberParameter3.Minimum = (int)numberParameter2.Value;
+                    numberParameter4.Maximum = (int)numberParameter2.Value;
+                    cubeList[operatedSec - 1].Height = 100 + ((int)numberParameter2.Value) * (345 - 100) / (70 - 1);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 23, (int)numberParameter2.Value);
+                    runMachPanel.Refresh();
+                    break;
+
             }
         }
 
@@ -247,6 +279,14 @@ namespace WindowsFormsApplication2
                     devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 10, (int)numberParameter3.Value);
                     break;
 
+                case 6:
+                    ecpList[operatedSec - 1].setUpperExPressure((int)numberParameter3.Value);
+                    numberParameter2.Maximum = (int)numberParameter3.Value;
+                    cubeList[operatedSec - 1].MaxHeight = 100 + ((int)numberParameter3.Value) * (345 - 100) / (70 - 1);
+                    cubeList[operatedSec - 1].MaximumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MaxWidth, cubeList[operatedSec - 1].MaxHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 23, (int)numberParameter3.Value);
+                    break;
             }
         }
 
@@ -289,6 +329,15 @@ namespace WindowsFormsApplication2
                     cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
                     devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 10, (int)numberParameter4.Value);
                     break;
+
+                case 6:
+                    ecpList[operatedSec - 1].setLowerExPressure((int)numberParameter4.Value);
+                    numberParameter2.Minimum = (int)numberParameter4.Value;
+                    cubeList[operatedSec - 1].MinHeight = 100 + ((int)numberParameter4.Value) * (345 - 100) / (70 - 1);
+                    cubeList[operatedSec - 1].MinimumSize = new System.Drawing.Size(cubeList[operatedSec - 1].MinWidth, cubeList[operatedSec - 1].MinHeight);
+                    cubeList[operatedSec - 1].Top = cubeList[operatedSec - 1].getBase() - cubeList[operatedSec - 1].Height;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 23, (int)numberParameter4.Value);
+                    break;
             }
         }
 
@@ -301,6 +350,14 @@ namespace WindowsFormsApplication2
                     numberParameter6.Minimum = (int)numberParameter5.Value;
                     numberParameter7.Maximum = (int)numberParameter5.Value;
                     devicehelper.changeParaInList(deviceList, planId, operatedSec, 5, (int)numberParameter5.Value);
+
+                    break;
+
+                case 6:
+                    ecpList[operatedSec - 1].setR2I((int)numberParameter5.Value);
+                    numberParameter6.Minimum = (int)numberParameter5.Value;
+                    numberParameter7.Maximum = (int)numberParameter5.Value;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 21, (int)numberParameter5.Value);
 
                     break;
             }
@@ -316,6 +373,13 @@ namespace WindowsFormsApplication2
                     devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 5, (int)numberParameter6.Value);
 
                     break;
+
+                case 6:
+                    ecpList[operatedSec - 1].setUpperR2I((int)numberParameter6.Value);
+                    numberParameter5.Maximum = (int)numberParameter6.Value;
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 21, (int)numberParameter6.Value);
+
+                    break;
             }
         }
 
@@ -329,10 +393,56 @@ namespace WindowsFormsApplication2
                     devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 5, (int)numberParameter7.Value);
 
                     break;
+
+                case 6:
+                    ecpList[operatedSec - 1].setLowerR2I((int)numberParameter7.Value);
+                    numberParameter5.Minimum = (int)numberParameter7.Value;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 21, (int)numberParameter7.Value);
+
+                    break;
             }
 
         }
 
+        private void numberParameter8_ValueChanged(object sender, EventArgs e)
+        {
+            switch(deviceTypeDisplayNow)
+            {
+                case 6:
+                    ecpList[operatedSec - 1].setR2D((int)numberParameter8.Value);
+                    numberParameter9.Minimum = (int)numberParameter8.Value;
+                    numberParameter10.Maximum = (int)numberParameter8.Value;
+                    devicehelper.changeParaInList(deviceList, planId, operatedSec, 22, (int)numberParameter8.Value);
+
+                    break;
+            }
+        }
+
+        private void numberParameter9_ValueChanged(object sender, EventArgs e)
+        {
+            switch (deviceTypeDisplayNow)
+            {
+                case 6:
+                    ecpList[operatedSec - 1].setUpperR2D((int)numberParameter9.Value);
+                    numberParameter8.Maximum = (int)numberParameter9.Value;
+                    devicehelper.changeParaMaxValueInList(deviceList, planId, operatedSec, 22, (int)numberParameter9.Value);
+
+                    break;
+            }
+        }
+
+        private void numberParameter10_ValueChanged(object sender, EventArgs e)
+        {
+            switch (deviceTypeDisplayNow)
+            {
+                case 6:
+                    ecpList[operatedSec - 1].setLowerR2D((int)numberParameter10.Value);
+                    numberParameter8.Minimum = (int)numberParameter10.Value;
+                    devicehelper.changeParaMinValueInList(deviceList, planId, operatedSec, 22, (int)numberParameter10.Value);
+
+                    break;
+            }
+        }
 
 
         private void cubeMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -344,9 +454,18 @@ namespace WindowsFormsApplication2
             txSectionNumber.Text = (cube.TabIndex + 1).ToString();
             operatedSec = cube.TabIndex + 1;
 
+
             switch(deviceTypeDisplayNow)
             {
                 case 1:
+                    numberParameter1.ValueChanged -= new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged -= new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged -= new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged -= new System.EventHandler(this.numberParameter4_ValueChanged);
+                    numberParameter5.ValueChanged -= new System.EventHandler(this.numberParameter5_ValueChanged);
+                    numberParameter6.ValueChanged -= new System.EventHandler(this.numberParameter6_ValueChanged);
+                    numberParameter7.ValueChanged -= new System.EventHandler(this.numberParameter7_ValueChanged);
+
                     numberParameter1.Value = treadmillList[cube.TabIndex].getTime();
 
                     numberParameter2.Maximum = 2500;
@@ -383,9 +502,22 @@ namespace WindowsFormsApplication2
                     numberParameter7.Maximum = treadmillList[cube.TabIndex].getSlope();
                     numberParameter7.Minimum = 0;
 
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+                    numberParameter5.ValueChanged += new System.EventHandler(this.numberParameter5_ValueChanged);
+                    numberParameter6.ValueChanged += new System.EventHandler(this.numberParameter6_ValueChanged);
+                    numberParameter7.ValueChanged += new System.EventHandler(this.numberParameter7_ValueChanged);
+
                     break;
 
                 case 3:
+                    numberParameter1.ValueChanged -= new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged -= new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged -= new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged -= new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     numberParameter1.Value = ellipticalList[cube.TabIndex].getDistance();
 
                     numberParameter2.Maximum = 15;
@@ -405,9 +537,19 @@ namespace WindowsFormsApplication2
                     numberParameter4.Maximum = ellipticalList[cube.TabIndex].getResistance();
                     numberParameter4.Minimum = 1;
 
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     break;
 
                 case 13:
+                    numberParameter1.ValueChanged -= new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged -= new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged -= new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged -= new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     numberParameter1.Value = uprightCycleList[cube.TabIndex].getDistance();
 
                     numberParameter2.Maximum = 16;
@@ -427,9 +569,19 @@ namespace WindowsFormsApplication2
                     numberParameter4.Maximum = uprightCycleList[cube.TabIndex].getResistance();
                     numberParameter4.Minimum = 1;
 
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     break;
 
                 case 14:
+                    numberParameter1.ValueChanged -= new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged -= new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged -= new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged -= new System.EventHandler(this.numberParameter4_ValueChanged);
+
                     numberParameter1.Value = recumbentCycleList[cube.TabIndex].getDistance();
 
                     numberParameter2.Maximum = 15;
@@ -449,6 +601,89 @@ namespace WindowsFormsApplication2
                     numberParameter4.Maximum = recumbentCycleList[cube.TabIndex].getResistance();
                     numberParameter4.Minimum = 1;
 
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+
+                    break;
+
+                case 6:
+                    numberParameter1.ValueChanged -= new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged -= new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged -= new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged -= new System.EventHandler(this.numberParameter4_ValueChanged);
+                    numberParameter5.ValueChanged -= new System.EventHandler(this.numberParameter5_ValueChanged);
+                    numberParameter6.ValueChanged -= new System.EventHandler(this.numberParameter6_ValueChanged);
+                    numberParameter7.ValueChanged -= new System.EventHandler(this.numberParameter7_ValueChanged);
+                    numberParameter8.ValueChanged -= new System.EventHandler(this.numberParameter8_ValueChanged);
+                    numberParameter9.ValueChanged -= new System.EventHandler(this.numberParameter9_ValueChanged);
+                    numberParameter10.ValueChanged -= new System.EventHandler(this.numberParameter10_ValueChanged);
+
+                    numberParameter1.Value = ecpList[cube.TabIndex].getTime();
+
+                    numberParameter2.Maximum = 70;
+                    numberParameter2.Minimum = 1;
+                    numberParameter3.Maximum = 70;
+                    numberParameter3.Minimum = 1;
+                    numberParameter4.Maximum = 70;
+                    numberParameter4.Minimum = 1;
+
+                    numberParameter5.Maximum = 500;
+                    numberParameter5.Minimum = 1;
+                    numberParameter6.Maximum = 500;
+                    numberParameter6.Minimum = 1;
+                    numberParameter7.Maximum = 500;
+                    numberParameter7.Minimum = 1;
+
+                    numberParameter8.Maximum = 500;
+                    numberParameter8.Minimum = 1;
+                    numberParameter9.Maximum = 500;
+                    numberParameter9.Minimum = 1;
+                    numberParameter10.Maximum = 500;
+                    numberParameter10.Minimum = 1;
+
+                    numberParameter2.Value = ecpList[cube.TabIndex].getExPressure();
+                    numberParameter3.Value = ecpList[cube.TabIndex].getUpperExPressure();
+                    numberParameter4.Value = ecpList[cube.TabIndex].getLowerExPressure();
+                    numberParameter2.Maximum = ecpList[cube.TabIndex].getUpperExPressure();
+                    numberParameter2.Minimum = ecpList[cube.TabIndex].getLowerExPressure();
+                    numberParameter3.Maximum = 70;
+                    numberParameter3.Minimum = ecpList[cube.TabIndex].getExPressure();
+                    numberParameter4.Maximum = ecpList[cube.TabIndex].getExPressure();
+                    numberParameter4.Minimum = 1;
+
+                    numberParameter5.Value = ecpList[cube.TabIndex].getR2I();
+                    numberParameter6.Value = ecpList[cube.TabIndex].getUpperR2I();
+                    numberParameter7.Value = ecpList[cube.TabIndex].getLowerR2I();
+                    numberParameter5.Maximum = ecpList[cube.TabIndex].getUpperR2I();
+                    numberParameter5.Minimum = ecpList[cube.TabIndex].getLowerR2I();
+                    numberParameter6.Maximum = 500;
+                    numberParameter6.Minimum = ecpList[cube.TabIndex].getR2I();
+                    numberParameter7.Maximum = ecpList[cube.TabIndex].getR2I();
+                    numberParameter7.Minimum = 1;
+
+                    numberParameter8.Value = ecpList[cube.TabIndex].getR2D();
+                    numberParameter9.Value = ecpList[cube.TabIndex].getUpperR2D();
+                    numberParameter10.Value = ecpList[cube.TabIndex].getLowerR2D();
+                    numberParameter8.Maximum = ecpList[cube.TabIndex].getUpperR2D();
+                    numberParameter8.Minimum = ecpList[cube.TabIndex].getLowerR2D();
+                    numberParameter9.Maximum = 500;
+                    numberParameter9.Minimum = ecpList[cube.TabIndex].getR2D();
+                    numberParameter10.Maximum = ecpList[cube.TabIndex].getR2D();
+                    numberParameter10.Minimum = 1;
+
+                    numberParameter1.ValueChanged += new System.EventHandler(this.numberParameter1_ValueChanged);
+                    numberParameter2.ValueChanged += new System.EventHandler(this.numberParameter2_ValueChanged);
+                    numberParameter3.ValueChanged += new System.EventHandler(this.numberParameter3_ValueChanged);
+                    numberParameter4.ValueChanged += new System.EventHandler(this.numberParameter4_ValueChanged);
+                    numberParameter5.ValueChanged += new System.EventHandler(this.numberParameter5_ValueChanged);
+                    numberParameter6.ValueChanged += new System.EventHandler(this.numberParameter6_ValueChanged);
+                    numberParameter7.ValueChanged += new System.EventHandler(this.numberParameter7_ValueChanged);
+                    numberParameter8.ValueChanged += new System.EventHandler(this.numberParameter8_ValueChanged);
+                    numberParameter9.ValueChanged += new System.EventHandler(this.numberParameter9_ValueChanged);
+                    numberParameter10.ValueChanged += new System.EventHandler(this.numberParameter10_ValueChanged);
+
                     break;
             }
         }
@@ -465,6 +700,85 @@ namespace WindowsFormsApplication2
                     for (int i = position + 1; i < cubeList.Count(); i++)
                     {
                         cubeList[i].Left = cubeList[i - 1].Left + (int)(0.75 * cubeList[i - 1].Width);
+                    }
+
+                    switch(deviceTypeDisplayNow)
+                    {
+                        case 1:
+                            if (cube.isMoveRight == true)
+                                numberParameter1.Value = cube.Width * 12;
+                            if (cube.isMoveTop == true)
+                            {
+                                if (cube.Height == cube.MaxHeight)
+                                    numberParameter2.Value = numberParameter2.Maximum;
+                                else if (cube.Height == cube.MinHeight)
+                                    numberParameter2.Value = numberParameter2.Minimum;
+                                else
+                                    numberParameter2.Value = (cube.Height - 100) * 480 / 49;
+                            }
+
+                            break;
+
+                        case 3:
+                            if (cube.isMoveRight == true)
+                                numberParameter1.Value = cube.Width * 2;
+                            if (cube.isMoveTop == true) 
+                            {
+                                if (cube.Height == cube.MaxHeight)
+                                    numberParameter2.Value = numberParameter2.Maximum;
+                                else if (cube.Height == cube.MinHeight)
+                                    numberParameter2.Value = numberParameter2.Minimum;
+                                else
+                                    numberParameter2.Value = (cube.Height - 100) * 14 / 245;
+                            }
+
+                            break;
+
+                        case 13:
+                            if (cube.isMoveRight == true)
+                                numberParameter1.Value = cube.Width * 2;
+                            if (cube.isMoveTop == true) 
+                            {
+                                if (cube.Height == cube.MaxHeight)
+                                    numberParameter2.Value = numberParameter2.Maximum;
+                                else if (cube.Height == cube.MinHeight)
+                                    numberParameter2.Value = numberParameter2.Minimum;
+                                else
+                                    numberParameter2.Value = (cube.Height - 100) * 15 / 245;
+                            }
+
+                            break;
+
+                        case 14:
+                            if (cube.isMoveRight == true)
+                                numberParameter1.Value = cube.Width * 2;
+                            if (cube.isMoveTop == true) 
+                            {
+                                if (cube.Height == cube.MaxHeight)
+                                    numberParameter2.Value = numberParameter2.Maximum;
+                                else if (cube.Height == cube.MinHeight)
+                                    numberParameter2.Value = numberParameter2.Minimum;
+                                else
+                                    numberParameter2.Value = (cube.Height - 100) * 14 / 245;
+                            }
+
+                            break;
+
+                        case 6:
+                            if (cube.isMoveRight == true)
+                                numberParameter1.Value = cube.Width * 6;
+                            if (cube.isMoveTop == true) 
+                            {
+                                if (cube.Height == cube.MaxHeight)
+                                    numberParameter2.Value = numberParameter2.Maximum;
+                                else if (cube.Height == cube.MinHeight)
+                                    numberParameter2.Value = numberParameter2.Minimum;
+                                else
+                                    numberParameter2.Value = (cube.Height - 100) * 69 / 245;
+                            }
+
+                            break;
+
                     }
                 }
             }

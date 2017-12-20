@@ -21,6 +21,8 @@ public class CubeControl : UserControl
     private EnumMousePointPosition m_MousePointPosition;
     private Point p, p1;
 
+    public bool isMoveRight = false;
+    public bool isMoveTop = false;
     public CubeControl(int width, int height)
     {
         this.MinimumSize = new System.Drawing.Size(MinWidth, MinHeight);
@@ -311,10 +313,12 @@ public class CubeControl : UserControl
             {
                 case EnumMousePointPosition.MouseSizeRight:
 
+                    lCtrl.isMoveRight = true;
                     lCtrl.isMove = true;
                     lCtrl.Width = lCtrl.Width + (e.X - p1.X) / 2;
                     p1.X = e.X;
-                    p1.Y = e.Y;
+                    p1.Y = e.Y;                    
+
                     break;
                 case EnumMousePointPosition.MouseSizeTop:
 
@@ -322,6 +326,7 @@ public class CubeControl : UserControl
                         break;
                     else
                     {
+                        lCtrl.isMoveTop = true;
                         lCtrl.isMove = true;
                         lCtrl.Top = lCtrl.Top + e.Y - p.Y;
                         lCtrl.Height = lCtrl.Height - (e.Y - p1.Y);
@@ -346,6 +351,8 @@ public class CubeControl : UserControl
         else
         {
             lCtrl.isMove = false;
+            lCtrl.isMoveRight = false;
+            lCtrl.isMoveTop = false;
             m_MousePointPosition = MousePointPosition(lCtrl.Size, e); //'判断光标的位置状态
             switch (m_MousePointPosition) //'改变光标
             {
