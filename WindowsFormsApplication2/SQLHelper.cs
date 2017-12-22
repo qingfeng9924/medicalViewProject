@@ -21,6 +21,10 @@ namespace WindowsFormsApplication2
         SqlDataReader sqldrMonitor;
         SqlDataReader sqldrOrder;
         SqlDataReader sqldrDevice;
+        SqlDataReader sqldrPatientName;
+        SqlDataReader sqldrDoctorName;
+        SqlDataReader sqldrExeTime;
+        SqlDataReader sqldrIsAva;
         //设置sql语句
         public string setsql(string str)
         {
@@ -38,6 +42,76 @@ namespace WindowsFormsApplication2
                 sqlcon.Open();
             }
             sqlcmd.Connection = sqlcon;
+        }
+
+        //查询病人姓名
+        public string sqlReaderPatientName()
+        {
+            sqlcmd.CommandText = setsql("select * from TB_PATIENT,TB_DOCTOR_ADVICE where TB_PATIENT.PATIENT_ID = TB_DOCTOR_ADVICE.PATIENT_ID and TB_DOCTOR_ADVICE.ADVICE_ID = " + doctorAdviceId);
+            sqldrPatientName = sqlcmd.ExecuteReader();
+            string patient_name = null;
+            if(sqldrPatientName.HasRows)
+            {
+                while(sqldrPatientName.Read())
+                {
+                    patient_name = sqldrPatientName["NAME"].ToString();
+                }
+            }
+            sqldrPatientName.Close();
+            return patient_name;
+        }
+
+        /*
+        //查询医生姓名
+        public string sqlReaderDoctorName()
+        {
+            sqlcmd.CommandText = setsql("select * from TB_PATIENT,TB_DOCTOR_ADVICE where TB_PATIENT.PATIENT_ID = TB_DOCTOR_ADVICE.PATIENT_ID and TB_DOCTOR_ADVICE.ADVICE_ID = " + doctorAdviceId);
+            sqldrDoctorName = sqlcmd.ExecuteReader();
+            string patient_name = null;
+            if (sqldrDoctorName.HasRows)
+            {
+                while (sqldrDoctorName.Read())
+                {
+                    patient_name = sqldrDoctorName["NAME"].ToString();
+                }
+            }
+            sqldrDoctorName.Close();
+            return patient_name;
+        }
+        */
+
+        //查询执行时间
+        public string sqlReaderExeTime()
+        {
+            sqlcmd.CommandText = setsql("select EXECUTE_TIME from TB_DOCTOR_ADVICE where ADVICE_ID = " + doctorAdviceId);
+            sqldrExeTime = sqlcmd.ExecuteReader();
+            string exeTime = null;
+            if (sqldrExeTime.HasRows)
+            {
+                while (sqldrExeTime.Read())
+                {
+                    exeTime = sqldrExeTime["EXECUTE_TIME"].ToString();
+                }
+            }
+            sqldrExeTime.Close();
+            return exeTime;
+        }
+
+        //查询医嘱状态
+        public string sqlReaderIsAva()
+        {
+            sqlcmd.CommandText = setsql("select IS_AVAILABLE from TB_DOCTOR_ADVICE where ADVICE_ID = " + doctorAdviceId);
+            sqldrIsAva = sqlcmd.ExecuteReader();
+            string isAva = null;
+            if (sqldrIsAva.HasRows)
+            {
+                while (sqldrIsAva.Read())
+                {
+                    isAva = sqldrIsAva["IS_AVAILABLE"].ToString();
+                }
+            }
+            sqldrIsAva.Close();
+            return isAva;
         }
 
         //数据库查询

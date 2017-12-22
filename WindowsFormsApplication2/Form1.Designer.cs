@@ -80,10 +80,10 @@ namespace WindowsFormsApplication2
         Panel topPanel;
         //信息panel
         Panel infoPanel;
-        Label doctorInfoLabel, patientInfoLabel, adviceIsExeLabel, exeTimeLabel;
+        Label doctorInfoLabel, patientInfoLabel, adviceIsAvaLabel, exeTimeLabel;
         string doc=null;
         string pat=null;
-        string isExe=null;
+        string isAva=null;
         string exeTime=null;
 
         RadioButton isStrictExe;
@@ -164,7 +164,7 @@ namespace WindowsFormsApplication2
             //测试赋值
             doc = "医生1";
             pat = "病人1";
-            isExe = "未执行";
+            isAva = "可用";
             exeTime = "****-**-**";
 
             this.AutoScroll = true;
@@ -209,14 +209,14 @@ namespace WindowsFormsApplication2
             infoPanel.Controls.Add(patientInfoLabel);
 
 
-            adviceIsExeLabel = new Label();
-            adviceIsExeLabel.Font = helper.createFont1();
-            adviceIsExeLabel.Size = new System.Drawing.Size(width / 6 -1, infoPanel.Height - 1);
-            adviceIsExeLabel.Location = new Point(width / 6*2, 0);
-            adviceIsExeLabel.Text = "医嘱状态:" + isExe;
-            adviceIsExeLabel.BorderStyle = BorderStyle.FixedSingle;
+            adviceIsAvaLabel = new Label();
+            adviceIsAvaLabel.Font = helper.createFont1();
+            adviceIsAvaLabel.Size = new System.Drawing.Size(width / 6 -1, infoPanel.Height - 1);
+            adviceIsAvaLabel.Location = new Point(width / 6*2, 0);
+            adviceIsAvaLabel.Text = "医嘱状态:" + isAva;
+            adviceIsAvaLabel.BorderStyle = BorderStyle.FixedSingle;
            // adviceIsExeLabel.TextAlign = ContentAlignment.BottomLeft;
-            infoPanel.Controls.Add(adviceIsExeLabel);
+            infoPanel.Controls.Add(adviceIsAvaLabel);
 
             exeTimeLabel = new Label();
             exeTimeLabel.Font = helper.createFont1();

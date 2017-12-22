@@ -23,11 +23,11 @@ namespace WindowsFormsApplication2
 
             PointF px1 = new PointF(move, newY);
             PointF px2 = new PointF(newX, newY);
-            g.DrawLine(new Pen(Brushes.Gray, 2), px1, px2);
+            //g.DrawLine(new Pen(Brushes.Gray, 2), px1, px2);
 
             PointF py1 = new PointF(move, move);
             PointF py2 = new PointF(move, newY);
-            g.DrawLine(new Pen(Brushes.Gray, 2), py1, py2);
+            //g.DrawLine(new Pen(Brushes.Gray, 2), py1, py2);
 
             /*
             Console.WriteLine(px1);
@@ -56,14 +56,14 @@ namespace WindowsFormsApplication2
                 PointF px1 = new PointF(move, LenY * i / len + move);
                 PointF px2 = new PointF(move + 10, LenY * i / len + move - 10);
                 string sx = (maxY - maxY * i / len).ToString(); ;
-                g.DrawLine(new Pen(Brushes.Gray, 2), px1, px2);
+                //g.DrawLine(new Pen(Brushes.Gray, 2), px1, px2);
                 StringFormat drawFormat = new StringFormat();
                 drawFormat.Alignment = StringAlignment.Far;
                 drawFormat.LineAlignment = StringAlignment.Center;
-                g.DrawString(sx, new Font("宋体", 8f), Brushes.Gray, new PointF(move / 1.2f, LenY * i / len + move * 1.1f), drawFormat);
+                //g.DrawString(sx, new Font("宋体", 8f), Brushes.Gray, new PointF(move / 1.2f, LenY * i / len + move * 1.1f), drawFormat);
             }
             Pen pen = new Pen(Color.Gray, 2);
-            g.DrawString("Y轴", new Font("宋体 ", 10f), Brushes.Gray, new PointF(move / 3, move / 2f));
+            //g.DrawString("Y轴", new Font("宋体 ", 10f), Brushes.Gray, new PointF(move / 3, move / 2f));
         }
 
         public static int getMove() { return (int)move; }

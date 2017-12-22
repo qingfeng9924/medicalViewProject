@@ -22,23 +22,41 @@ namespace WindowsFormsApplication2
         private int planId;
         private int[] monitorPara = new int[14];
         private int operatedSec;
+        private string patient_name = null;
+        private string executeTime = null;
+        private string isAvailable = null;
 
         public Form1()
         {
             setData();
             setMonitorPara();
             InitializeComponent();
+            setAdviceInfo();
         }
 
         public void setData()
         {
             sqlHelper = new SQLHelper(307);
             //sqlHelper = new SQLHelper(319);
+            patient_name = sqlHelper.sqlReaderPatientName();
+            executeTime = sqlHelper.sqlReaderExeTime();
+            isAvailable = sqlHelper.sqlReaderIsAva();
             monitorList = sqlHelper.sqlReadMonitor();
             deviceList = sqlHelper.sqlReaderDevice();
             orderList = new List<ExecuteOrder>();
             orderList = sqlHelper.sqlReaderOrder();
             planId = orderList[0].EXERCISE_PLAN_ID;
+            System.Console.WriteLine("病人：" + patient_name);
+        }
+
+        public void setAdviceInfo()
+        {
+            patientInfoLabel.Text = "病人：" + patient_name;
+            exeTimeLabel.Text = "执行时间：" + executeTime;
+            if (isAvailable.Equals("1"))
+                adviceIsAvaLabel.Text = "医嘱状态：可用";
+            else
+                adviceIsAvaLabel.Text = "医嘱状态：不可用";
         }
 
         public void setMonitorPara()
