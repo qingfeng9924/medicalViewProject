@@ -256,7 +256,7 @@ namespace WindowsFormsApplication2
             boPanel.Location = new Point(0, 10);
             boPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 5, topPanel.Height);
 
-            boPanel.BorderStyle = BorderStyle.Fixed3D;
+            //boPanel.BorderStyle = BorderStyle.Fixed3D;
 
             boImageLabel = new Label();
             boImageLabel.Image = boImage;
@@ -268,11 +268,11 @@ namespace WindowsFormsApplication2
 
             boOpPanel = new UserPanel();
 
-            boOpPanel.BackColor = Color.Red;
+           // boOpPanel.BackColor = Color.Red;
 
             boOpPanel.Location = new Point(0, boImageLabel.Height + 27);
             boOpPanel.Size = new System.Drawing.Size(boPanel.Width, 35);
-            boOpPanel.BackColor = Color.Red;
+            //boOpPanel.BackColor = Color.Red;
             boLabel = new Label();
             boLabel.Size = new System.Drawing.Size((int)((float)boOpPanel.Width / 60 * (monitorPara[1] - monitorPara[0])), boOpPanel.Height);
             boLabel.Location = new Point((int)(((float)monitorPara[0] - 60) / 60 * boOpPanel.Width), 0);
@@ -309,7 +309,7 @@ namespace WindowsFormsApplication2
             hrPanel.Location = new Point(boPanel.Width + boPanel.Location.X + 5, 10);
             hrPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 5, topPanel.Height);
 
-            hrPanel.BorderStyle = BorderStyle.Fixed3D; ;
+            //hrPanel.BorderStyle = BorderStyle.Fixed3D; ;
 
             hrImageLabel = new Label();
             hrImageLabel.Image = hrImage;
