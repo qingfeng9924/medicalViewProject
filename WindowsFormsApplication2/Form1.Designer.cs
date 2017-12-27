@@ -246,38 +246,40 @@ namespace WindowsFormsApplication2
             saveButton.MouseClick += new MouseEventHandler(saveButton_MouseClick);
             this.saveButton.FlatStyle = FlatStyle.Flat;
             infoPanel.Controls.Add(saveButton);
-            
-            
-            
-            
+
+
+
+
             //*******************////////////
             //血氧
             boPanel = new Panel();
-            boPanel.Location = new Point(0,10);
-            boPanel.Size = new System.Drawing.Size(topPanel.Width/4 - 5, topPanel.Height);
+            boPanel.Location = new Point(0, 10);
+            boPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 5, topPanel.Height);
 
-            //boPanel.BorderStyle = BorderStyle.Fixed3D;
+            boPanel.BorderStyle = BorderStyle.Fixed3D;
 
             boImageLabel = new Label();
             boImageLabel.Image = boImage;
             boImageLabel.Location = new Point(0, 0);
-            boImageLabel.Size = new System.Drawing.Size(boPanel.Width,boPanel.Height/2-10);
+            boImageLabel.Size = new System.Drawing.Size(boPanel.Width, boPanel.Height / 2 - 10);
 
 
 
 
             boOpPanel = new UserPanel();
 
-            boOpPanel.Location = new Point(0,boImageLabel.Height+27);
-            boOpPanel.Size = new System.Drawing.Size(boPanel.Width,35);
-            //boOpPanel.BackColor = Color.Red;
+            boOpPanel.BackColor = Color.Red;
+
+            boOpPanel.Location = new Point(0, boImageLabel.Height + 27);
+            boOpPanel.Size = new System.Drawing.Size(boPanel.Width, 35);
+            boOpPanel.BackColor = Color.Red;
             boLabel = new Label();
             boLabel.Size = new System.Drawing.Size((int)((float)boOpPanel.Width / 60 * (monitorPara[1] - monitorPara[0])), boOpPanel.Height);
-            boLabel.Location = new Point((int)(((float)monitorPara[0]-60)/60*boOpPanel.Width), 0);
+            boLabel.Location = new Point((int)(((float)monitorPara[0] - 60) / 60 * boOpPanel.Width), 0);
             boLabel.BackColor = helper.createColor(114, 149, 182);
             boLabel.MouseHover += new EventHandler(mouseHover);
-           // new OperateControl(boLabel);
-           // boLabel.Text = "ssssssssssssssssssssssss";
+            // new OperateControl(boLabel);
+            // boLabel.Text = "ssssssssssssssssssssssss";
             boOpPanel.Controls.Add(boLabel);
 
             /*
@@ -285,17 +287,17 @@ namespace WindowsFormsApplication2
              * */
 
             infLabel[0] = new Label();
-            infLabel[0].Location = new Point(boLabel.Location.X-5,boOpPanel.Location.Y+boOpPanel.Height+2);
-            infLabel[0].Size = new Size(30,10);
+            infLabel[0].Location = new Point(boLabel.Location.X - 5, boOpPanel.Location.Y + boOpPanel.Height + 2);
+            infLabel[0].Size = new Size(30, 10);
             infLabel[1] = new Label();
-            infLabel[1].Location = new Point(boLabel.Location.X+boLabel.Width, boOpPanel.Location.Y + boOpPanel.Height + 2);
+            infLabel[1].Location = new Point(boLabel.Location.X + boLabel.Width, boOpPanel.Location.Y + boOpPanel.Height + 2);
             infLabel[1].Size = new Size(30, 10);
             /*
              * 初始化血氧参数
              * */
             infLabel[0].Text = monitorPara[0].ToString();
             infLabel[1].Text = monitorPara[1].ToString();
- 
+
             boPanel.Controls.Add(infLabel[0]);
 
             boPanel.Controls.Add(infLabel[1]);
@@ -305,9 +307,9 @@ namespace WindowsFormsApplication2
             //心率
             hrPanel = new Panel();
             hrPanel.Location = new Point(boPanel.Width + boPanel.Location.X + 5, 10);
-            hrPanel.Size = new System.Drawing.Size(topPanel.Width/4 - 5, topPanel.Height);
+            hrPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 5, topPanel.Height);
 
-            //hrPanel.BorderStyle = BorderStyle.Fixed3D; ;
+            hrPanel.BorderStyle = BorderStyle.Fixed3D; ;
 
             hrImageLabel = new Label();
             hrImageLabel.Image = hrImage;
@@ -320,20 +322,20 @@ namespace WindowsFormsApplication2
             hrOpPanel.Size = new System.Drawing.Size(hrPanel.Width, 35);
             hrOpPanel.BackColor = Color.White;
             hrLabel[0] = new Label();
-            hrLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[3] - monitorPara[2])/130*hrOpPanel.Width), hrOpPanel.Height - 4);
-            hrLabel[0].Location = new Point((int)((float)hrOpPanel.Width * (monitorPara[2]-30)/130), 2);
+            hrLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[3] - monitorPara[2]) / 150 * hrOpPanel.Width), hrOpPanel.Height - 4);
+            hrLabel[0].Location = new Point((int)((float)hrOpPanel.Width * (monitorPara[2] - 30) / 150), 2);
             hrLabel[0].BackColor = Color.Red;
-           // hrLabel[0].MouseClick += new MouseEventHandler(mouseClick);
+            // hrLabel[0].MouseClick += new MouseEventHandler(mouseClick);
             hrLabel[1] = new Label();
-            hrLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[4] - monitorPara[3]) / 130 * hrOpPanel.Width), hrOpPanel.Height - 4);
-            hrLabel[1].Location = new Point(hrLabel[0].Location.X+hrLabel[0].Width+2, 2);
+            hrLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[4] - monitorPara[3]) / 150 * hrOpPanel.Width), hrOpPanel.Height - 4);
+            hrLabel[1].Location = new Point(hrLabel[0].Location.X + hrLabel[0].Width + 2, 2);
             hrLabel[1].BackColor = helper.createColor(114, 149, 182);
-           // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
+            // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
 
 
             hrLabel[2] = new Label();
-            hrLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[5] - monitorPara[4]) / 130 * hrOpPanel.Width), hrOpPanel.Height - 4);
-            hrLabel[2].Location = new Point(hrLabel[1].Location.X+hrLabel[1].Width+2, 2);
+            hrLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[5] - monitorPara[4]) / 150 * hrOpPanel.Width), hrOpPanel.Height - 4);
+            hrLabel[2].Location = new Point(hrLabel[1].Location.X + hrLabel[1].Width + 2, 2);
 
             hrLabel[2].BackColor = Color.Red;
             hrLabel[2].MouseEnter += new EventHandler(mouseHover);
@@ -346,12 +348,12 @@ namespace WindowsFormsApplication2
             //初始化心率
             infLabel[2] = new Label();
             infLabel[2].Size = new Size(30, 10);
-            infLabel[2].Location = new Point(hrLabel[0].Location.X-25,hrOpPanel.Location.Y+hrOpPanel.Height+2);
-            infLabel[2].Text = monitorPara[2]+"";
+            infLabel[2].Location = new Point(hrLabel[0].Location.X - 25, hrOpPanel.Location.Y + hrOpPanel.Height + 2);
+            infLabel[2].Text = monitorPara[2] + "";
 
             infLabel[3] = new Label();
             infLabel[3].Size = new Size(30, 10);
-            infLabel[3].Location = new Point(hrLabel[1].Location.X - 25, hrOpPanel.Location.Y -15);
+            infLabel[3].Location = new Point(hrLabel[1].Location.X - 25, hrOpPanel.Location.Y - 15);
             infLabel[3].Text = monitorPara[3] + "";
             infLabel[4] = new Label();
             infLabel[4].Size = new Size(30, 10);
@@ -360,7 +362,7 @@ namespace WindowsFormsApplication2
             infLabel[5] = new Label();
             infLabel[5].Size = new Size(30, 10);
             infLabel[5].Location = new Point(hrLabel[2].Location.X + hrLabel[2].Width - 15, hrOpPanel.Location.Y - 15);
-            infLabel[5].Text =monitorPara[5]+"";
+            infLabel[5].Text = monitorPara[5] + "";
 
             //infLabel[3].BackColor = Color.Transparent;
             hrPanel.Controls.Add(infLabel[2]);
@@ -378,16 +380,16 @@ namespace WindowsFormsApplication2
             hrOpPanel.Controls.Add(hrLabel[2]);
             hrPanel.Controls.Add(hrImageLabel);
             hrPanel.Controls.Add(hrOpPanel);
-          //  hrOpPanel.MouseClick += new MouseEventHandler(re);
-          //  hrLabel[1].MouseMove += new MouseEventHandler(mouseMove);
-           
-            
-            
+            //  hrOpPanel.MouseClick += new MouseEventHandler(re);
+            //  hrLabel[1].MouseMove += new MouseEventHandler(mouseMove);
+
+
+
             //收缩压
 
             ssyPanel = new Panel();
             ssyPanel.Location = new Point(hrPanel.Width + hrPanel.Location.X + 5, 10);
-            ssyPanel.Size = new System.Drawing.Size(topPanel.Width/4 - 5, topPanel.Height);
+            ssyPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 5, topPanel.Height);
 
             ssyImageLabel = new Label();
             ssyImageLabel.Image = ssyImage;
@@ -400,13 +402,13 @@ namespace WindowsFormsApplication2
             ssyOpPanel.Size = new System.Drawing.Size(ssyPanel.Width, 35);
             ssyOpPanel.BackColor = Color.White;
             ssyLabel[0] = new Label();
-          //  Console.WriteLine("(float)(monitorPara[7] - monitorPara[6])" + (int)((float)(monitorPara[7] - monitorPara[6]) / 150 * ssyOpPanel.Width));
+            //  Console.WriteLine("(float)(monitorPara[7] - monitorPara[6])" + (int)((float)(monitorPara[7] - monitorPara[6]) / 150 * ssyOpPanel.Width));
             ssyLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[7] - monitorPara[6]) / 150 * ssyOpPanel.Width), ssyOpPanel.Height - 4);
-            ssyLabel[0].Location = new Point((int)(((float)(monitorPara[6]-30))/150*ssyOpPanel.Width), 2);
+            ssyLabel[0].Location = new Point((int)(((float)(monitorPara[6] - 30)) / 150 * ssyOpPanel.Width), 2);
             ssyLabel[0].BackColor = Color.Red;
-           // ssyLabel[0].MouseClick += new MouseEventHandler(mouseClick);
+            // ssyLabel[0].MouseClick += new MouseEventHandler(mouseClick);
             ssyLabel[1] = new Label();
-            ssyLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[8] - monitorPara[7])/150*ssyOpPanel.Width), ssyOpPanel.Height - 4);
+            ssyLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[8] - monitorPara[7]) / 150 * ssyOpPanel.Width), ssyOpPanel.Height - 4);
             ssyLabel[1].Location = new Point(ssyLabel[0].Location.X + ssyLabel[0].Width + 2, 2);
             ssyLabel[1].BackColor = helper.createColor(114, 149, 182);
             // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
@@ -425,11 +427,11 @@ namespace WindowsFormsApplication2
 
             //初始化收缩压
             infLabel[6] = new Label();
-            infLabel[6].Location = new Point(ssyLabel[0].Location.X-25,ssyOpPanel.Height+ssyOpPanel.Location.Y+2);
-            infLabel[6].Size = new System.Drawing.Size(20,10);
+            infLabel[6].Location = new Point(ssyLabel[0].Location.X - 25, ssyOpPanel.Height + ssyOpPanel.Location.Y + 2);
+            infLabel[6].Size = new System.Drawing.Size(20, 10);
             infLabel[6].Text = monitorPara[6] + "";
             infLabel[7] = new Label();
-            infLabel[7].Location = new Point(ssyLabel[1].Location.X - 25,ssyOpPanel.Location.Y -15);
+            infLabel[7].Location = new Point(ssyLabel[1].Location.X - 25, ssyOpPanel.Location.Y - 15);
             infLabel[7].Size = new System.Drawing.Size(25, 10);
             infLabel[7].Text = monitorPara[7] + "";
             infLabel[8] = new Label();
@@ -454,14 +456,14 @@ namespace WindowsFormsApplication2
             ssyOpPanel.Controls.Add(ssyLabel[2]);
             ssyPanel.Controls.Add(ssyImageLabel);
             ssyPanel.Controls.Add(ssyOpPanel);
-            
+
 
 
             ///舒张压
             ///
             szyPanel = new Panel();
             szyPanel.Location = new Point(ssyPanel.Width + ssyPanel.Location.X + 5, 10);
-            szyPanel.Size = new System.Drawing.Size(topPanel.Width / 4-5, topPanel.Height);
+            szyPanel.Size = new System.Drawing.Size(topPanel.Width / 4 - 5, topPanel.Height);
 
             szyImageLabel = new Label();
             szyImageLabel.Image = szyImage;
@@ -474,19 +476,19 @@ namespace WindowsFormsApplication2
             szyOpPanel.Size = new System.Drawing.Size(szyPanel.Width, 35);
             szyOpPanel.BackColor = Color.White;
             szyLabel[0] = new Label();
-            szyLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[11]-monitorPara[10])/100*szyOpPanel.Width), szyOpPanel.Height - 4);
-            szyLabel[0].Location = new Point((int)((float)(monitorPara[10]-30)/100*szyOpPanel.Width), 2);
+            szyLabel[0].Size = new System.Drawing.Size((int)((float)(monitorPara[11] - monitorPara[10]) / 105 * szyOpPanel.Width), szyOpPanel.Height - 4);
+            szyLabel[0].Location = new Point((int)((float)(monitorPara[10] - 50) / 115 * szyOpPanel.Width), 2);
             szyLabel[0].BackColor = Color.Red;
             //szyLabel[0].MouseClick += new MouseEventHandler(mouseClick);
             szyLabel[1] = new Label();
-            szyLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[12] - monitorPara[11]) / 100 * szyOpPanel.Width), szyOpPanel.Height - 4);
+            szyLabel[1].Size = new System.Drawing.Size((int)((float)(monitorPara[12] - monitorPara[11]) / 115 * szyOpPanel.Width), szyOpPanel.Height - 4);
             szyLabel[1].Location = new Point(szyLabel[0].Location.X + szyLabel[0].Width + 2, 2);
             szyLabel[1].BackColor = helper.createColor(114, 149, 182);
             // hrLabel[1].MouseClick += new MouseEventHandler(mouseClick);
 
 
             szyLabel[2] = new Label();
-            szyLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[13] - monitorPara[12]) / 100 * szyOpPanel.Width), szyOpPanel.Height - 4);
+            szyLabel[2].Size = new System.Drawing.Size((int)((float)(monitorPara[13] - monitorPara[12]) / 115 * szyOpPanel.Width), szyOpPanel.Height - 4);
             szyLabel[2].Location = new Point(szyLabel[1].Location.X + szyLabel[1].Width + 2, 2);
 
             szyLabel[2].BackColor = Color.Red;
@@ -510,7 +512,7 @@ namespace WindowsFormsApplication2
             infLabel[12].Text = monitorPara[12] + "";
 
             infLabel[13] = new Label();
-            infLabel[13].Location = new Point(szyLabel[2].Location.X + szyLabel[2].Width -25, szyOpPanel.Location.Y - 15);
+            infLabel[13].Location = new Point(szyLabel[2].Location.X + szyLabel[2].Width - 25, szyOpPanel.Location.Y - 15);
             infLabel[13].Size = new System.Drawing.Size(25, 10);
             infLabel[13].Text = monitorPara[13] + "";
 
@@ -535,60 +537,28 @@ namespace WindowsFormsApplication2
 
 
             labelPanel = new Panel();
-            labelPanel.Size = new Size(width,height/6);
-            labelPanel.Location = new Point(0,topPanel.Location.Y+topPanel.Height);
+            labelPanel.Size = new Size(width, height / 6);
+            labelPanel.Location = new Point(0, topPanel.Location.Y + topPanel.Height);
             //labelPanel.BackColor = Color.Pink;
             labelPanel.BorderStyle = BorderStyle.FixedSingle;
 
             //this.Controls.Add(label_runMach);
-           // this.Controls.Add(label_lieByc);
+            // this.Controls.Add(label_lieByc);
             //this.Controls.Add(label_ovalMach);
-           // this.Controls.Add(label_stByc);
+            // this.Controls.Add(label_stByc);
 
 
             //血氧等参数信息
-            
 
-            
-            /*
-            //跑步机label
-            label_runMach = new System.Windows.Forms.Label();
-          //  label_runMach.Text = "跑步机";
-            label_runMach.Location = new System.Drawing.Point(20, 10);
-            label_runMach.Size = new System.Drawing.Size(lpWidth, lpWidth);
-            label_runMach.Image = runningMach_Image;
-            label_runMach.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            //runningMach_Image.Width = label_runMach.Width;
 
-            labelPanel.Controls.Add(label_runMach);
-            //椭圆机
-            label_ovalMach = new System.Windows.Forms.Label();
-           // label_ovalMach.Text = "椭圆机";
-            label_ovalMach.Location = new System.Drawing.Point(label_runMach.Location.X + label_runMach.Width + 60, label_runMach.Location.Y);
-            label_ovalMach.Size = new System.Drawing.Size(lpWidth, lpWidth);
-            label_ovalMach.Image = ovalMach_Image;
-            label_ovalMach.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
-            labelPanel.Controls.Add(label_ovalMach);
-            //立式健身车
-            label_stByc = new System.Windows.Forms.Label();
-          //  label_stByc.Text = "立式健身车";
-            label_stByc.Location = new System.Drawing.Point(label_ovalMach.Location.X + label_ovalMach.Width +60, label_ovalMach.Location.Y);
-            label_stByc.Size = new System.Drawing.Size(lpWidth, lpHeight);
-            label_stByc.Image = ovalMach_Image;
-            label_stByc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            labelPanel.Controls.Add(label_stByc);
-         
-            //卧式健身车
-            label_lieByc = new System.Windows.Forms.Label();
-            label_lieByc.Text = "立式健身车";
-            label_lieByc.Location = new System.Drawing.Point(label_stByc.Location.X + label_stByc.Width+40, label_stByc.Location.Y);
-            label_lieByc.Size = new System.Drawing.Size(lpWidth,lpHeight);
-            label_lieByc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            label_lieByc.Image = ovalMach_Image;
-            labelPanel.Controls.Add(label_lieByc);
 
-            **/
+
+
+            runMachPanel = new DrawPanel();
+            runMachPanel.Location = new Point(0, labelPanel.Location.Y + labelPanel.Height);
+            runMachPanel.Size = new Size(width - 300, height - labelPanel.Location.Y - labelPanel.Height - 20);
+            runMachPanel.BackColor = Color.White;
            
             runMachPanel = new DrawPanel();
             runMachPanel.Location = new Point(0,labelPanel.Location.Y+labelPanel.Height);
